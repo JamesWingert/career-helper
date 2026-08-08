@@ -35,9 +35,9 @@ const sharedPhases = [
     ],
   },
   {
-    title: "FDE judgment and communication",
+    title: "Discovery, architecture, and handoff",
     weeks: "Weeks 4–6",
-    why: "Useful for FDE, solutions roles, senior platform ownership, and architecture interviews.",
+    why: "Useful for FDE, platform and research-infrastructure ownership, and architecture interviews.",
     modules: [
       { id: "s10", label: "Week 04", title: "Discovery and ruthless scope", topics: ["Users, current workflow, and actual bottleneck", "Available data and system constraints", "Success metric and unacceptable failure", "Automation vs. human approval", "Two-week smallest useful release"], practice: "Start from a deliberately vague business request and run discovery.", proof: "One-page requirements brief with assumptions, exclusions, and measurable success." },
       { id: "s11", label: "Week 05", title: "Architecture under real constraints", topics: ["Cost, latency, reliability, and quality tradeoffs", "Build vs. buy and prototype vs. production", "Security, governance, and operational ownership", "Alternatives rejected and why", "Trust, limitations, and safe failure"], practice: "Design the system and demonstrate one failure path live.", proof: "Two-page design plus a 10-minute demo for both technical and business audiences." },
@@ -49,7 +49,7 @@ const sharedPhases = [
     why: "Useful for ML serving, platform work, deployment debugging, and trading systems.",
     modules: [
       { id: "s1", label: "Week 07", title: "Measurement before optimization", topics: ["Throughput vs. latency vs. utilization", "p50/p95/p99 and tail amplification", "Warm-up, JIT effects, measurement noise", "Coordinated omission and realistic load", "Baseline capacity and bottleneck hypotheses"], practice: "Load-test one concurrent Java service under a reproducible workload.", proof: "Baseline report with workload, percentiles, resource use, and three evidence-backed hypotheses." },
-      { id: "s2", label: "Week 08", title: "CPU, memory, and JVM behavior", topics: ["Flame graphs and hot-path analysis", "Allocation rate, heap pressure, and object lifetime", "GC collectors, pause time, and safepoints", "CPU caches, locality, false sharing", "JFR, async-profiler, and allocation profiling"], practice: "Find and fix one CPU or allocation bottleneck without changing behavior.", proof: "Before/after traces plus an explanation of why the change worked." },
+      { id: "s2", label: "Week 08", title: "CPU, memory, and JVM behavior", topics: ["Flame graphs and hot-path analysis", "Allocation rate, heap pressure, and object lifetime", "GC collectors, pause time, and safepoints", "CPU caches, locality, false sharing", "JFR, async-profiler, and allocation profiling", "Profiling beyond the JVM: perf, py-spy, and GPU utilization basics"], practice: "Find and fix one CPU or allocation bottleneck without changing behavior.", proof: "Before/after traces plus an explanation of why the change worked." },
       { id: "s3", label: "Week 09", title: "Concurrency, queues, and networks", topics: ["Locks, atomics, contention, and thread pools", "Queue depth, service time, and Little’s Law", "Backpressure, batching, and overload control", "TCP lifecycle, buffers, Nagle, and connection reuse", "Head-of-line blocking and timeout propagation"], practice: "Introduce contention and overload deliberately, then stabilize the service.", proof: "Measured p99 improvement with a short incident-style performance memo." },
     ],
   },
