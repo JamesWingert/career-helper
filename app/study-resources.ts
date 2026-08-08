@@ -185,6 +185,36 @@ export const studyResources: Record<string, StudyResource[]> = {
     { title: "Implement a continuous feedback control loop", provider: "AWS Well-Architected", url: "https://docs.aws.amazon.com/wellarchitected/latest/agentic-ai-lens/agentops02-bp04.html", format: "Guide", access: "Free", selection: "Structured feedback, outcome metrics, version attribution, and validation.", purpose: "Connects post-launch behavior back to measurable improvement." },
     { title: "Rules of Machine Learning", provider: "Google", url: "https://developers.google.com/machine-learning/guides/rules-of-ml", format: "Guide", access: "Free", selection: "Rules 27, 28, 33, and 39.", purpose: "A compact launch checklist for metric choice, future-time validation, and rollout decisions." },
   ],
+  r1: [
+    { title: "Reinforcement Learning: An Introduction, 2nd Edition", provider: "Sutton and Barto", url: "http://incompleteideas.net/book/the-book-2nd.html", format: "Book", access: "Free", selection: "Chapters 1, 3, and 13: the RL problem, finite MDPs, and policy-gradient methods. Skip dynamic programming and bandit depth initially.", purpose: "The canonical vocabulary and problem framing every RL-infrastructure conversation assumes." },
+    { title: "Spinning Up in Deep RL", provider: "OpenAI", url: "https://spinningup.openai.com/en/latest/", format: "Guide", access: "Free", selection: "Introduction to RL Parts 1\u20133: key concepts, kinds of algorithms, and intro to policy optimization; skip the implementations until Module 02.", purpose: "Bridges textbook RL to the deep-RL algorithms labs actually run." },
+    { title: "RLHF Book", provider: "Nathan Lambert", url: "https://rlhfbook.com/", format: "Book", access: "Free", selection: "Problem setup, reward models, policy-gradient (PPO/GRPO), and the verifiable-rewards (RLVR) chapters.", purpose: "The current post-training playbook\u2014exactly the training loop this branch builds infrastructure for." },
+  ],
+  r2: [
+    { title: "Gymnasium Documentation", provider: "Farama Foundation", url: "https://gymnasium.farama.org/", format: "Docs", access: "Free", selection: "Basic Usage, the Env API (reset/step/seed semantics), and the Make Your Own Custom Environment tutorial.", purpose: "The reference environment interface\u2014teaches the contracts every environment job builds on." },
+    { title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?", provider: "Jimenez et al. / ICLR 2024", url: "https://arxiv.org/abs/2310.06770", format: "Paper", access: "Free", selection: "Task-instance construction, execution harness, and evaluation sections; skim the results tables.", purpose: "A real, widely-used agent environment: how tasks, containers, and graders get built from messy reality." },
+    { title: "gVisor Documentation", provider: "Google", url: "https://gvisor.dev/docs/", format: "Docs", access: "Free", selection: "Architecture Guide and the security model: syscall interception, isolation boundaries, and resource controls.", purpose: "The isolation layer pattern behind safe agent sandboxes and untrusted-code execution." },
+  ],
+  r3: [
+    { title: "Reward Hacking in Reinforcement Learning", provider: "Lilian Weng", url: "https://lilianweng.github.io/posts/2024-11-28-reward-hacking/", format: "Guide", access: "Free", selection: "The taxonomy, RLHF-specific hacking (sycophancy, judge gaming), and mitigation sections.", purpose: "The best single survey of how rewards and graders fail in practice." },
+    { title: "Defining and Characterizing Reward Hacking", provider: "Skalse et al. / NeurIPS 2022", url: "https://arxiv.org/abs/2209.13085", format: "Paper", access: "Free", selection: "Sections 1\u20133: the formal definition of hackable proxies and why unhackable proxies are rare.", purpose: "Rigor for the intuition\u2014explains when a proxy reward can be trusted at all." },
+    { title: "T\u00fclu 3: Pushing Frontiers in Open Language Model Post-Training", provider: "Allen Institute for AI", url: "https://arxiv.org/abs/2411.15124", format: "Paper", access: "Free", selection: "The RLVR sections: verifiable-reward construction, data selection, and evaluation of the trained policies.", purpose: "A fully documented, open example of verifiable rewards used in real post-training." },
+  ],
+  r4: [
+    { title: "The Llama 3 Herd of Models", provider: "Meta AI", url: "https://arxiv.org/abs/2407.21783", format: "Paper", access: "Free", selection: "Post-training data sections: SFT mix, preference-data collection, quality filtering, and deduplication.", purpose: "The most detailed public documentation of a frontier data engine." },
+    { title: "distilabel Documentation", provider: "Argilla", url: "https://distilabel.argilla.io/", format: "Docs", access: "Free", selection: "Pipelines, steps/tasks, and the quality/filtering examples; build one small generation-plus-judgment pipeline.", purpose: "A production framework for synthetic-data pipelines with built-in quality control." },
+    { title: "Cosmopedia: How to Create Large-Scale Synthetic Data", provider: "Hugging Face", url: "https://huggingface.co/blog/cosmopedia", format: "Guide", access: "Free", selection: "Prompt curation, generation at scale, and the deduplication/decontamination sections.", purpose: "A concrete end-to-end account of synthetic data at billions-of-tokens scale." },
+  ],
+  r5: [
+    { title: "Inspect", provider: "UK AI Safety Institute", url: "https://inspect.aisi.org.uk/", format: "Docs", access: "Free", selection: "Tasks, solvers, and scorers concepts; then the agent-evaluation and sandboxing sections.", purpose: "A modern, well-designed eval framework\u2014the architecture current eval-infra roles expect you to know." },
+    { title: "lm-evaluation-harness", provider: "EleutherAI", url: "https://github.com/EleutherAI/lm-evaluation-harness", format: "Docs", access: "Free", selection: "The New Task guide and task-config system; add one custom task with deterministic scoring.", purpose: "The de facto standard harness\u2014teaches task registries and versioned configs by use." },
+    { title: "Demystifying evals for AI agents", provider: "Anthropic Engineering", url: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents", format: "Guide", access: "Free", selection: "Transcript inspection, regression evals, and production monitoring sections.", purpose: "Connects harness mechanics to the judgment layer: reading transcripts and catching regressions." },
+  ],
+  r6: [
+    { title: "Ray Core Documentation", provider: "Anyscale / Ray project", url: "https://docs.ray.io/en/latest/", format: "Docs", access: "Free", selection: "Ray Core key concepts\u2014tasks, actors, and objects\u2014then skim Ray Train/RLlib overviews for how rollouts distribute.", purpose: "The distributed-execution substrate most RL and data-engine infrastructure is built on." },
+    { title: "Weights & Biases Documentation", provider: "Weights & Biases", url: "https://docs.wandb.ai/", format: "Docs", access: "Free", selection: "Experiments and Artifacts: runs, config tracking, and artifact lineage; instrument one real training script.", purpose: "Experiment tracking and lineage\u2014the reproducibility backbone research teams live in." },
+    { title: "Slurm Quick Start User Guide", provider: "SchedMD", url: "https://slurm.schedmd.com/quickstart.html", format: "Docs", access: "Free", selection: "Core concepts, partitions, job arrays, and preemption; map each to how a shared GPU cluster stays fair.", purpose: "The scheduling vocabulary of research clusters\u2014asked about constantly in research-infra interviews." },
+  ],
   q1: [
     { title: "Trading and Exchanges", provider: "Larry Harris / Oxford Academic", url: "https://academic.oup.com/book/52292", format: "Book", access: "Paid", selection: "Chapters 3–6, 13–14, 19, and 21: participants, orders, market structures, dealers, spreads, liquidity, and transaction costs.", purpose: "The canonical practitioner-oriented foundation for market microstructure." },
     { title: "Market Centers", provider: "U.S. Securities and Exchange Commission", url: "https://www.sec.gov/answers/market.htm", format: "Guide", access: "Free", selection: "Trace a US equity order from investor to broker, routing venue, execution, and confirmation.", purpose: "Grounds the abstract participant map in the real US market-routing lifecycle." },
@@ -285,6 +315,20 @@ export const roleEvidence: Record<string, RoleEvidence[]> = {
       title: "AI Systems Engineer, Codex Agents",
       url: "https://openai.com/careers/ai-systems-engineer-codex-agents-san-francisco/",
       signals: "Agent harnesses, model interaction, safe execution, orchestration, evals, reliability, latency, cost, capacity, and quality.",
+    },
+  ],
+  research: [
+    {
+      company: "Anthropic",
+      title: "Staff Software Engineer, Environments Infrastructure",
+      url: "https://job-boards.greenhouse.io/anthropic/jobs/5367436008",
+      signals: "RL environments at scale, sandboxed execution, evaluation integration, and research-facing platform engineering.",
+    },
+    {
+      company: "OpenAI",
+      title: "Software Engineer, RL Training Infra",
+      url: "https://openai.com/careers/software-engineer-rl-training-infra-san-francisco/",
+      signals: "Rollout infrastructure, environments, data pipelines, distributed systems, and post-training integration.",
     },
   ],
   quant: [
