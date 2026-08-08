@@ -25,43 +25,42 @@ type Branch = {
 
 const sharedPhases = [
   {
-    title: "Performance engineering",
-    weeks: "Weeks 1–3",
-    why: "Useful for ML serving, platform work, deployment debugging, and trading systems.",
-    modules: [
-      { id: "s1", label: "Week 01", title: "Measurement before optimization", topics: ["Throughput vs. latency vs. utilization", "p50/p95/p99 and tail amplification", "Warm-up, JIT effects, measurement noise", "Coordinated omission and realistic load", "Baseline capacity and bottleneck hypotheses"], practice: "Load-test one concurrent Java service under a reproducible workload.", proof: "Baseline report with workload, percentiles, resource use, and three evidence-backed hypotheses." },
-      { id: "s2", label: "Week 02", title: "CPU, memory, and JVM behavior", topics: ["Flame graphs and hot-path analysis", "Allocation rate, heap pressure, and object lifetime", "GC collectors, pause time, and safepoints", "CPU caches, locality, false sharing", "JFR, async-profiler, and allocation profiling"], practice: "Find and fix one CPU or allocation bottleneck without changing behavior.", proof: "Before/after traces plus an explanation of why the change worked." },
-      { id: "s3", label: "Week 03", title: "Concurrency, queues, and networks", topics: ["Locks, atomics, contention, and thread pools", "Queue depth, service time, and Little’s Law", "Backpressure, batching, and overload control", "TCP lifecycle, buffers, Nagle, and connection reuse", "Head-of-line blocking and timeout propagation"], practice: "Introduce contention and overload deliberately, then stabilize the service.", proof: "Measured p99 improvement with a short incident-style performance memo." },
-    ],
-  },
-  {
     title: "Statistical evaluation judgment",
-    weeks: "Weeks 4–6",
+    weeks: "Weeks 1–3",
     why: "Useful for LLM evals, ML launches, experimentation, and later quant work.",
     modules: [
-      { id: "s4", label: "Week 04", title: "Experiments, samples, and uncertainty", topics: ["Hypotheses and decision-oriented metrics", "Sampling bias and representative datasets", "Confounders, randomization, and selection effects", "Confidence intervals and practical significance", "Power, sample size, and noisy measurements"], practice: "Design an experiment for a real model or system change.", proof: "Experiment plan stating the decision, assumptions, failure modes, and required evidence." },
-      { id: "s5", label: "Week 05", title: "Human-calibrated evaluation", topics: ["Golden sets and failure taxonomies", "Labeling rubrics and inter-rater disagreement", "Confusion matrices, precision, recall, FPR, FNR", "Judge calibration against human ratings", "Slice analysis across users, languages, and edge cases"], practice: "Calibrate an automated evaluator against a small human-labeled set.", proof: "Error analysis showing where the evaluator can and cannot be trusted." },
-      { id: "s6", label: "Week 06", title: "Launch decisions and temporal traps", topics: ["Offline/online metric mismatch", "Time-series leakage and non-stationarity", "Canaries, shadow traffic, and sequential monitoring", "Launch, hold, rollback, and escalation thresholds", "Cost-weighted errors and unacceptable failures"], practice: "Turn evaluation results into an explicit launch policy.", proof: "Ship/hold/rollback rules with owners, thresholds, and production signals." },
-    ],
-  },
-  {
-    title: "Messy integration work",
-    weeks: "Weeks 7–9",
-    why: "Useful wherever the valuable work crosses systems you do not control—especially FDE.",
-    modules: [
-      { id: "s7", label: "Week 07", title: "Unknown APIs and identity boundaries", topics: ["Reading incomplete API contracts", "OAuth, service identities, scopes, and token lifecycles", "Pagination, rate limits, webhooks, and schema drift", "Contract tests and compatibility layers", "PII, authorization, and least privilege"], practice: "Integrate one unfamiliar API without wrapping it in idealized assumptions.", proof: "A working adapter with contract tests, auth boundaries, and documented limitations." },
-      { id: "s8", label: "Week 08", title: "Conflicting data and migrations", topics: ["Source-of-truth decisions", "Entity identity and deduplication", "Reconciliation and conflict resolution", "Idempotency keys and replay", "Backfills, dual writes, cutovers, and rollback"], practice: "Combine two disagreeing data sources and migrate one schema safely.", proof: "Reconciliation rules, migration plan, validation queries, and rollback path." },
-      { id: "s9", label: "Week 09", title: "Partial failure and recovery", topics: ["Timeout budgets and bounded retries", "Circuit breakers, DLQs, and poison messages", "Partial completion and compensating actions", "Dependency degradation and graceful fallback", "Audit trails, recovery tooling, and operator UX"], practice: "Break each dependency independently and recover without corrupting state.", proof: "Failure matrix and tested recovery runbook across three connected systems." },
+      { id: "s4", label: "Week 01", title: "Experiments, samples, and uncertainty", topics: ["Hypotheses and decision-oriented metrics", "Sampling bias and representative datasets", "Confounders, randomization, and selection effects", "Confidence intervals and practical significance", "Power, sample size, and noisy measurements"], practice: "Design an experiment for a real model or system change.", proof: "Experiment plan stating the decision, assumptions, failure modes, and required evidence." },
+      { id: "s5", label: "Week 02", title: "Human-calibrated evaluation", topics: ["Golden sets and failure taxonomies", "Labeling rubrics and inter-rater disagreement", "Confusion matrices, precision, recall, FPR, FNR", "Judge calibration against human ratings", "Slice analysis across users, languages, and edge cases"], practice: "Calibrate an automated evaluator against a small human-labeled set.", proof: "Error analysis showing where the evaluator can and cannot be trusted." },
+      { id: "s6", label: "Week 03", title: "Launch decisions and temporal traps", topics: ["Offline/online metric mismatch", "Time-series leakage and non-stationarity", "Canaries, shadow traffic, and sequential monitoring", "Launch, hold, rollback, and escalation thresholds", "Cost-weighted errors and unacceptable failures"], practice: "Turn evaluation results into an explicit launch policy.", proof: "Ship/hold/rollback rules with owners, thresholds, and production signals." },
     ],
   },
   {
     title: "FDE judgment and communication",
-    weeks: "Weeks 10–12",
+    weeks: "Weeks 4–6",
     why: "Useful for FDE, solutions roles, senior platform ownership, and architecture interviews.",
     modules: [
-      { id: "s10", label: "Week 10", title: "Discovery and ruthless scope", topics: ["Users, current workflow, and actual bottleneck", "Available data and system constraints", "Success metric and unacceptable failure", "Automation vs. human approval", "Two-week smallest useful release"], practice: "Start from a deliberately vague business request and run discovery.", proof: "One-page requirements brief with assumptions, exclusions, and measurable success." },
-      { id: "s11", label: "Week 11", title: "Architecture under real constraints", topics: ["Cost, latency, reliability, and quality tradeoffs", "Build vs. buy and prototype vs. production", "Security, governance, and operational ownership", "Alternatives rejected and why", "Trust, limitations, and safe failure"], practice: "Design the system and demonstrate one failure path live.", proof: "Two-page design plus a 10-minute demo for both technical and business audiences." },
-      { id: "s12", label: "Week 12", title: "Changing requirements and handoff", topics: ["Second data source or business unit", "New roles and permission boundaries", "Harder cost or latency limit", "What to build, defer, or reject", "Runbook, adoption, support, and ownership transfer"], practice: "Implement a surprise change request without hiding the tradeoffs.", proof: "Revised design, working change, and a clear branch decision for the next phase." },
+      { id: "s10", label: "Week 04", title: "Discovery and ruthless scope", topics: ["Users, current workflow, and actual bottleneck", "Available data and system constraints", "Success metric and unacceptable failure", "Automation vs. human approval", "Two-week smallest useful release"], practice: "Start from a deliberately vague business request and run discovery.", proof: "One-page requirements brief with assumptions, exclusions, and measurable success." },
+      { id: "s11", label: "Week 05", title: "Architecture under real constraints", topics: ["Cost, latency, reliability, and quality tradeoffs", "Build vs. buy and prototype vs. production", "Security, governance, and operational ownership", "Alternatives rejected and why", "Trust, limitations, and safe failure"], practice: "Design the system and demonstrate one failure path live.", proof: "Two-page design plus a 10-minute demo for both technical and business audiences." },
+      { id: "s12", label: "Week 06", title: "Changing requirements and handoff", topics: ["Second data source or business unit", "New roles and permission boundaries", "Harder cost or latency limit", "What to build, defer, or reject", "Runbook, adoption, support, and ownership transfer"], practice: "Implement a surprise change request without hiding the tradeoffs.", proof: "Revised design, working change, and a clear branch decision for the next phase." },
+    ],
+  },  {
+    title: "Performance engineering",
+    weeks: "Weeks 7–9",
+    why: "Useful for ML serving, platform work, deployment debugging, and trading systems.",
+    modules: [
+      { id: "s1", label: "Week 07", title: "Measurement before optimization", topics: ["Throughput vs. latency vs. utilization", "p50/p95/p99 and tail amplification", "Warm-up, JIT effects, measurement noise", "Coordinated omission and realistic load", "Baseline capacity and bottleneck hypotheses"], practice: "Load-test one concurrent Java service under a reproducible workload.", proof: "Baseline report with workload, percentiles, resource use, and three evidence-backed hypotheses." },
+      { id: "s2", label: "Week 08", title: "CPU, memory, and JVM behavior", topics: ["Flame graphs and hot-path analysis", "Allocation rate, heap pressure, and object lifetime", "GC collectors, pause time, and safepoints", "CPU caches, locality, false sharing", "JFR, async-profiler, and allocation profiling"], practice: "Find and fix one CPU or allocation bottleneck without changing behavior.", proof: "Before/after traces plus an explanation of why the change worked." },
+      { id: "s3", label: "Week 09", title: "Concurrency, queues, and networks", topics: ["Locks, atomics, contention, and thread pools", "Queue depth, service time, and Little’s Law", "Backpressure, batching, and overload control", "TCP lifecycle, buffers, Nagle, and connection reuse", "Head-of-line blocking and timeout propagation"], practice: "Introduce contention and overload deliberately, then stabilize the service.", proof: "Measured p99 improvement with a short incident-style performance memo." },
+    ],
+  },
+  {
+    title: "Messy integration work",
+    weeks: "Weeks 10–12",
+    why: "Useful wherever the valuable work crosses systems you do not control—especially FDE.",
+    modules: [
+      { id: "s7", label: "Week 10", title: "Unknown APIs and identity boundaries", topics: ["Reading incomplete API contracts", "OAuth, service identities, scopes, and token lifecycles", "Pagination, rate limits, webhooks, and schema drift", "Contract tests and compatibility layers", "PII, authorization, and least privilege"], practice: "Integrate one unfamiliar API without wrapping it in idealized assumptions.", proof: "A working adapter with contract tests, auth boundaries, and documented limitations." },
+      { id: "s8", label: "Week 11", title: "Conflicting data and migrations", topics: ["Source-of-truth decisions", "Entity identity and deduplication", "Reconciliation and conflict resolution", "Idempotency keys and replay", "Backfills, dual writes, cutovers, and rollback"], practice: "Combine two disagreeing data sources and migrate one schema safely.", proof: "Reconciliation rules, migration plan, validation queries, and rollback path." },
+      { id: "s9", label: "Week 12", title: "Partial failure and recovery", topics: ["Timeout budgets and bounded retries", "Circuit breakers, DLQs, and poison messages", "Partial completion and compensating actions", "Dependency degradation and graceful fallback", "Audit trails, recovery tooling, and operator UX"], practice: "Break each dependency independently and recover without corrupting state.", proof: "Failure matrix and tested recovery runbook across three connected systems." },
     ],
   },
 ];
@@ -70,7 +69,7 @@ const sharedModules = sharedPhases.flatMap((phase) => phase.modules);
 
 const branches: Branch[] = [
   {
-    id: "fde", name: "FDE / AI Deployment", eyebrow: "Primary fit",
+    id: "fde", name: "FDE / AI Deployment", eyebrow: "1 · Primary fit",
     fit: "Adds customer delivery, rapid integration, and outcome ownership to the ML/GenAI platform experience already on your résumé.",
     focus: ["Open-ended customer problems", "Fast end-to-end implementation", "Production AI judgment", "Adoption and measurable outcomes"],
     targets: ["AI Deployment Engineer", "Forward Deployed Engineer — Applied AI", "Forward Deployed Software Engineer", "Forward Deployed AI Engineer", "Forward Deployed Infrastructure Engineer", "Forward Deployed Reliability Engineer", "Applied AI Engineer", "Applied AI Architect", "AI Solutions Engineer", "Customer Engineer — AI/ML", "Solutions Engineer — AI/ML", "AI Implementation Engineer", "Technical Consultant — AI", "GenAI Solutions Architect"],
@@ -85,7 +84,7 @@ const branches: Branch[] = [
     ],
   },
   {
-    id: "platform", name: "AI / ML Platform", eyebrow: "Deep technical branch",
+    id: "platform", name: "AI / ML Platform", eyebrow: "2 · Deep technical branch",
     fit: "Closest to your existing experience. The value is deeper serving, evaluation, platform-product, and infrastructure judgment—not relearning cloud basics.",
     focus: ["Model lifecycle and release control", "Serving and inference economics", "Distributed/GPU systems", "Platform adoption and multi-tenancy"],
     targets: ["AI Platform Engineer", "ML Platform Engineer", "ML Infrastructure Engineer", "AI Infrastructure Engineer", "Inference Platform Engineer", "Model Inference Engineer", "Inference Performance Engineer", "Cloud Inference Engineer", "Inference Runtime Engineer", "Model Serving Engineer", "LLM Infrastructure Engineer", "GenAI Platform Engineer", "ML Systems Engineer", "MLOps Platform Engineer", "Evaluation Platform Engineer", "Training Infrastructure Engineer", "Feature Platform Engineer", "Distributed Systems Engineer — ML", "AI Reliability Engineer"],
@@ -102,24 +101,7 @@ const branches: Branch[] = [
     ],
   },
   {
-    id: "genai", name: "GenAI / LLM / Evals", eyebrow: "AI systems branch",
-    fit: "Deepens reliable LLM applications and evaluation systems without drifting into research-model training or generic chatbot work.",
-    focus: ["Model behavior and inference", "Retrieval and agent reliability", "Human-calibrated evaluation", "Safety, observability, and cost"],
-    targets: ["GenAI Engineer", "LLM Engineer", "Applied AI Engineer", "AI Product Engineer", "Backend Software Engineer — Evals", "LLM Evaluation Engineer", "AI Evaluation Engineer", "AI Quality Engineer", "AI Reliability Engineer", "Agent Infrastructure Engineer", "Agent Systems Engineer", "RAG / Retrieval Engineer", "AI Systems Engineer", "AI Safety Engineer — Evals", "AI Product Infrastructure Engineer", "LLM Platform Engineer"],
-    avoid: ["Prompt-engineering-only titles", "Demo-driven agent work with no evaluation", "Generic full-stack roles with one model call", "Research roles centered on training foundation models"],
-    modules: [
-      { id: "g1", label: "Module 01", title: "Model behavior and inference", topics: ["Tokenization and context windows", "Sampling, temperature, and nondeterminism", "Structured outputs and constrained decoding", "Model selection and routing", "Latency and token economics"], practice: "Compare multiple models on one real task under fixed constraints.", proof: "Decision memo across quality, consistency, latency, and cost." },
-      { id: "g2", label: "Module 02", title: "Retrieval systems", topics: ["Chunking and document structure", "Sparse, dense, and hybrid retrieval", "Reranking and query rewriting", "Recall/precision evaluation", "Freshness, permissions, and citations"], practice: "Build and evaluate two retrieval strategies on the same corpus.", proof: "Retrieval benchmark plus error slices and access-control tests." },
-      { id: "g3", label: "Module 03", title: "Tools, agents, and workflow state", topics: ["Tool selection and argument validation", "State machines vs. open-ended loops", "Idempotent and partially completed side effects", "Context compaction and memory lifecycle", "Tool-schema versioning", "Long-running work, recovery, and resume", "Human approval and escalation"], practice: "Implement one bounded, recoverable tool-using workflow.", proof: "Trace-based tests for success, denial, timeout, partial side effect, retry, compaction, and resume." },
-      { id: "g4", label: "Module 04", title: "Evaluation design", topics: ["Task and failure taxonomy", "Representative golden sets", "Deterministic and rubric graders", "LLM judge calibration", "Confidence, slices, and regression thresholds"], practice: "Build an eval suite that detects a meaningful regression.", proof: "Calibrated results plus a documented blind spot." },
-      { id: "g5", label: "Module 05", title: "Safety and adversarial behavior", topics: ["Prompt injection and indirect injection", "Data exfiltration and tool abuse", "Privilege boundaries", "Unsupported claims and evidence requirements", "Content and business-policy enforcement"], practice: "Red-team retrieval and tool use, including cross-tenant attacks.", proof: "Threat model, adversarial set, mitigations, and residual risk." },
-      { id: "g6", label: "Module 06", title: "Reliability and observability", topics: ["Model/tool/retrieval traces", "Timeouts, retries, and fallbacks", "Invalid or partial outputs", "Quality-aware monitoring", "Audit logs and incident diagnosis"], practice: "Inject model, tool, database, and retrieval failures.", proof: "Failure matrix with safe behavior and operator action." },
-      { id: "g7", label: "Module 07", title: "Optimization and operating economics", topics: ["Prompt/context reduction", "Caching and batching", "Small/large model routing", "Asynchronous workflows", "Quality loss per dollar or millisecond saved"], practice: "Cut operating cost or latency without crossing a quality threshold.", proof: "Pareto curve and recommendation for a real workload." },
-      { id: "g8", label: "Module 08", title: "Production experiment and launch", topics: ["Offline-to-online validation", "Shadow and canary design", "Human acceptance signals", "Adoption and workflow outcomes", "Rollback and continuous evaluation"], practice: "Plan a launch where a high offline score is insufficient evidence.", proof: "Launch plan tied to user behavior, quality, risk, and business impact." },
-    ],
-  },
-  {
-    id: "quant", name: "Quant / Trading Engineering", eyebrow: "Harder optional branch",
+    id: "quant", name: "Quant / Trading Engineering", eyebrow: "3 · Harder optional branch",
     fit: "A serious systems specialization. It preserves software-engineering leverage, but requires market-domain depth plus stronger performance, networking, and correctness work.",
     focus: ["Market and exchange mechanics", "Low-latency concurrent systems", "Linux, networking, and hardware awareness", "Probability, simulation, risk, and correctness"],
     targets: ["Quantitative Developer", "Quantitative Software Engineer", "Electronic Trading Developer", "Algorithmic Trading Developer", "Electronic Execution Engineer", "Smart Order Router Engineer", "Trading Systems Engineer", "Trading Platform Engineer", "Software Engineer — Trading Strategies", "Software Engineer — Automated Trading Systems", "Market Data Engineer", "Feed Handler Engineer", "Exchange Connectivity Engineer", "FIX Connectivity Engineer", "Execution Engineer", "OMS / Execution Platform Engineer", "Low-Latency Java / C++ Engineer", "Front-Office Developer", "Desk Developer", "Strats Developer", "Quant Platform Engineer", "Research Infrastructure Engineer", "Research Platform Engineer", "Pricing & Risk Developer", "Trading Infrastructure Engineer", "Trading Production Engineer", "Trading Network Engineer"],
@@ -137,6 +119,22 @@ const branches: Branch[] = [
       { id: "q10", label: "Module 10", title: "Backtesting and simulation correctness", topics: ["Event-driven simulation", "Look-ahead, survivorship, and time-series leakage", "Latency, queue position, slippage, fees, and partial fills", "Train/validation/test splits through time", "Reproducibility and sensitivity analysis"], practice: "Backtest a simple execution rule with realistic frictions.", proof: "Bias checklist, sensitivity results, and a refusal to claim fake alpha." },
       { id: "q11", label: "Module 11", title: "Positions, P&L, and risk", topics: ["Positions, cash, realized and unrealized P&L", "Fees, FX conversion, settlement, and lot accounting", "Corrections, busts, corporate actions, and mark selection", "Exposure, limits, concentration, and kill behavior", "Hedging and Greeks at a conceptual level", "Drawdown, volatility, and scenario stress", "Reconciliation and end-of-day controls"], practice: "Add position/P&L tracking, risk limits, and reconciliation breaks to the simulator.", proof: "Tests for fills, fees, FX, marks, corrections, limit breaches, settlement, and reconciliation." },
       { id: "q12", label: "Module 12", title: "Trading-engineering capstone", topics: ["Feed → book → strategy → risk → gateway → fills", "Replay, packet recovery, and disaster recovery", "Property/state-machine tests and malformed-message fuzzing", "Sustained load, coordinated-omission-safe latency testing", "Operational dashboards, kill switch, and reconciliation", "Release/rollback procedure and incident drill", "Architecture and failure-mode defense"], practice: "Integrate the complete event-driven trading simulator and operate it through a failure drill.", proof: "Working system, benchmark report, test evidence, runbook, architecture document, and deep-dive demo." },
+    ],
+  },  {
+    id: "genai", name: "GenAI / LLM / Evals", eyebrow: "4 · AI systems branch",
+    fit: "Deepens reliable LLM applications and evaluation systems without drifting into research-model training or generic chatbot work.",
+    focus: ["Model behavior and inference", "Retrieval and agent reliability", "Human-calibrated evaluation", "Safety, observability, and cost"],
+    targets: ["GenAI Engineer", "LLM Engineer", "Applied AI Engineer", "AI Product Engineer", "Backend Software Engineer — Evals", "LLM Evaluation Engineer", "AI Evaluation Engineer", "AI Quality Engineer", "AI Reliability Engineer", "Agent Infrastructure Engineer", "Agent Systems Engineer", "RAG / Retrieval Engineer", "AI Systems Engineer", "AI Safety Engineer — Evals", "AI Product Infrastructure Engineer", "LLM Platform Engineer"],
+    avoid: ["Prompt-engineering-only titles", "Demo-driven agent work with no evaluation", "Generic full-stack roles with one model call", "Research roles centered on training foundation models"],
+    modules: [
+      { id: "g1", label: "Module 01", title: "Model behavior and inference", topics: ["Tokenization and context windows", "Sampling, temperature, and nondeterminism", "Structured outputs and constrained decoding", "Model selection and routing", "Latency and token economics"], practice: "Compare multiple models on one real task under fixed constraints.", proof: "Decision memo across quality, consistency, latency, and cost." },
+      { id: "g2", label: "Module 02", title: "Retrieval systems", topics: ["Chunking and document structure", "Sparse, dense, and hybrid retrieval", "Reranking and query rewriting", "Recall/precision evaluation", "Freshness, permissions, and citations"], practice: "Build and evaluate two retrieval strategies on the same corpus.", proof: "Retrieval benchmark plus error slices and access-control tests." },
+      { id: "g3", label: "Module 03", title: "Tools, agents, and workflow state", topics: ["Tool selection and argument validation", "State machines vs. open-ended loops", "Idempotent and partially completed side effects", "Context compaction and memory lifecycle", "Tool-schema versioning", "Long-running work, recovery, and resume", "Human approval and escalation"], practice: "Implement one bounded, recoverable tool-using workflow.", proof: "Trace-based tests for success, denial, timeout, partial side effect, retry, compaction, and resume." },
+      { id: "g4", label: "Module 04", title: "Evaluation design", topics: ["Task and failure taxonomy", "Representative golden sets", "Deterministic and rubric graders", "LLM judge calibration", "Confidence, slices, and regression thresholds"], practice: "Build an eval suite that detects a meaningful regression.", proof: "Calibrated results plus a documented blind spot." },
+      { id: "g5", label: "Module 05", title: "Safety and adversarial behavior", topics: ["Prompt injection and indirect injection", "Data exfiltration and tool abuse", "Privilege boundaries", "Unsupported claims and evidence requirements", "Content and business-policy enforcement"], practice: "Red-team retrieval and tool use, including cross-tenant attacks.", proof: "Threat model, adversarial set, mitigations, and residual risk." },
+      { id: "g6", label: "Module 06", title: "Reliability and observability", topics: ["Model/tool/retrieval traces", "Timeouts, retries, and fallbacks", "Invalid or partial outputs", "Quality-aware monitoring", "Audit logs and incident diagnosis"], practice: "Inject model, tool, database, and retrieval failures.", proof: "Failure matrix with safe behavior and operator action." },
+      { id: "g7", label: "Module 07", title: "Optimization and operating economics", topics: ["Prompt/context reduction", "Caching and batching", "Small/large model routing", "Asynchronous workflows", "Quality loss per dollar or millisecond saved"], practice: "Cut operating cost or latency without crossing a quality threshold.", proof: "Pareto curve and recommendation for a real workload." },
+      { id: "g8", label: "Module 08", title: "Production experiment and launch", topics: ["Offline-to-online validation", "Shadow and canary design", "Human acceptance signals", "Adoption and workflow outcomes", "Rollback and continuous evaluation"], practice: "Plan a launch where a high offline score is insufficient evidence.", proof: "Launch plan tied to user behavior, quality, risk, and business impact." },
     ],
   },
 ];
@@ -176,7 +174,7 @@ export default function Home() {
       <div className="goal"><span>North star</span><strong>Maintain $200k+ optionality through senior technical ownership.</strong></div>
     </section>
 
-    <nav aria-label="Career branches">{branches.map((candidate) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{candidate.name}</button>)}</nav>
+    <nav aria-label="Career branches">{branches.map((candidate, index) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{index + 1} · {candidate.name}</button>)}</nav>
 
     <section className="status">
       <div><span className="eyebrow">CURRENT BRANCH</span><h2>{selected.name}</h2><p>{selected.fit}</p></div>
@@ -189,7 +187,7 @@ export default function Home() {
     </section>
 
     <section className="syllabus">
-      <header><span className="eyebrow">12-WEEK SHARED SYLLABUS · ~5 HOURS/WEEK</span><h2>Common foundation</h2><p>Weeks 1–6 overlap most with trading engineering. Weeks 7–12 overlap most with FDE. All four phases deepen AI/ML platform judgment.</p></header>
+      <header><span className="eyebrow">12-WEEK SHARED SYLLABUS · ~5 HOURS/WEEK</span><h2>Common foundation</h2><p>Ordered by AI-resistance: evaluation judgment and discovery first, then the measurement and integration mechanics you still need to know cold. All four phases deepen every branch.</p></header>
       {sharedPhases.map((phase) => <section className="phase" key={phase.title}>
         <div className="phase-heading"><div><span>{phase.weeks}</span><h3>{phase.title}</h3></div><p>{phase.why}</p></div>
         <div className="module-grid">{phase.modules.map((module) => <ModuleCard key={module.id} module={module} checked={!!done[module.id]} onToggle={toggle} />)}</div>
