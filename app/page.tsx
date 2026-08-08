@@ -156,9 +156,23 @@ const branches: Branch[] = [
 
 export default function Home() {
   const [branch, setBranch] = useState("fde");
+  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
   const [done, setDone] = useState<Record<string, boolean>>({});
   const [loaded, setLoaded] = useState(false);
   const selected = branches.find((candidate) => candidate.id === branch) ?? branches[0];
+
+  useEffect(() => {
+    const stored = localStorage.getItem("career-gameplan-theme");
+    if (stored === "dark" || stored === "light") setTheme(stored);
+    else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("career-gameplan-theme", next); } catch {}
+  };
 
   useEffect(() => {
     try {
@@ -189,7 +203,7 @@ export default function Home() {
       <div className="goal"><span>North star</span><strong>Maintain $200k+ optionality through senior technical ownership.</strong></div>
     </section>
 
-    <nav aria-label="Career branches">{branches.map((candidate, index) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{index + 1} · {candidate.name}</button>)}</nav>
+    <nav aria-label="Career branches">{branches.map((candidate, index) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{index + 1} · {candidate.name}</button>)}<button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">{theme === "dark" ? "☀ Light" : "☾ Dark"}</button></nav>
 
     <section className="status">
       <div><span className="eyebrow">CURRENT BRANCH</span><h2>{selected.name}</h2><p>{selected.fit}</p></div>
