@@ -10,29 +10,59 @@ export default async function AiDashboardPage() {
   const maxTrueupTrend = Math.max(...d.trueup.categories.map((x) => x.trendPct));
   const maxBenchmark = Math.max(...d.benchmarks.map((x) => x.score));
 
+  const experiencedSignal = d.signals.find((s) => s.signal === "Experienced-worker employment");
+  const earlyCareerSignal = d.signals.find((s) => s.signal === "Early-career SWE employment");
+
   return (
     <main className={styles.page}>
       <header className={styles.top}>
         <div>
           <div className={styles.kicker}>SWE / AI labor market monitor</div>
-          <h1 className={styles.title}>Is software engineering actually getting automated away?</h1>
-          <p className={styles.dek}>
-            A biweekly evidence dashboard tracking hiring, displacement, frontier coding capability,
-            NYC openings and adjacent career paths. The point is to detect sustained changes early,
-            not react to model launches or executive predictions.
-          </p>
-          <div className={styles.read}>{d.currentRead}</div>
+          <h1 className={styles.title}>Software engineering risk dashboard</h1>
           <Link className={styles.back} href="/">← Career gameplan</Link>
         </div>
         <aside className={styles.stamp}>
           <span>Last research pass</span>
           <strong>{d.updatedAt}</strong>
-          <span>Next scheduled refresh</span>
+          <span>Next refresh</span>
           <strong>{d.nextRefresh}</strong>
-          <span>Cadence</span>
-          <strong>{d.cadence}</strong>
         </aside>
       </header>
+
+      <section className={styles.glance} aria-label="Quick glance scoreboard">
+        <div className={styles.glanceHead}>
+          <span>TL;DR · current read</span>
+          <strong>NO PIVOT SIGNAL</strong>
+        </div>
+        <div className={styles.scoreboard}>
+          <article className={styles.scoreCard}>
+            <span className={styles.scoreLabel}>Your ~5 YOE risk</span>
+            <strong className={styles.scoreValue}>LOW–MODERATE</strong>
+            <p>{experiencedSignal?.reading ?? "Experienced workers stable"}</p>
+          </article>
+          <article className={styles.scoreCard}>
+            <span className={styles.scoreLabel}>SWE hiring</span>
+            <strong className={styles.scoreValue}>MIXED</strong>
+            <p>FRED {d.metrics[0].value} · TrueUp software +{d.trueup.softwareTrendPct}%</p>
+          </article>
+          <article className={styles.scoreCard}>
+            <span className={styles.scoreLabel}>AI replacement risk</span>
+            <strong className={styles.scoreValue}>WATCH</strong>
+            <p>Frontier improves; long-horizon reliability still limits autonomy.</p>
+          </article>
+          <article className={styles.scoreCard}>
+            <span className={styles.scoreLabel}>NYC demand</span>
+            <strong className={styles.scoreValue}>{d.linkedin.countLabel}</strong>
+            <p>LinkedIn SWE results · directional, not a clean census.</p>
+          </article>
+          <article className={`${styles.scoreCard} ${styles.canaryCard}`}>
+            <span className={styles.scoreLabel}>Early-career canary</span>
+            <strong className={styles.scoreValue}>{earlyCareerSignal?.reading ?? "Weak"}</strong>
+            <p>Useful leading indicator; lower weight for your own job risk.</p>
+          </article>
+        </div>
+        <div className={styles.oneLine}><b>Bottom line:</b> stay in SWE, keep moving toward systems/domain-heavy work, and watch for deterioration spreading from junior hiring into experienced-worker employment and mid/senior demand.</div>
+      </section>
 
       <section className={styles.metrics} aria-label="Headline indicators">
         {d.metrics.map((m) => (
@@ -90,7 +120,7 @@ export default async function AiDashboardPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <h2>Observed labor effects</h2>
-          <p>Employment evidence gets more weight than predictions from labs, CEOs or social-media posts.</p>
+          <p>For your own risk, experienced-worker employment and mid/senior demand matter more than the early-career canary.</p>
         </div>
         <div className={styles.signalGrid}>
           {d.signals.map((s) => (
@@ -130,7 +160,7 @@ export default async function AiDashboardPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <h2>Pivot radar</h2>
-          <p>These are not recommendations based on hype. Each category is tracked for sustained posting growth, NYC depth, compensation, employer breadth and transferability from software engineering.</p>
+          <p>Each category is tracked for sustained posting growth, NYC depth, compensation, employer breadth and transferability from software engineering.</p>
         </div>
         <div className={styles.radar}>
           {d.pivotRadar.map((r) => (
@@ -147,7 +177,7 @@ export default async function AiDashboardPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <h2>Current NYC role sample</h2>
-          <p>A small high-signal sample, not a giant scrape. It intentionally mixes core SWE with systems, AI infrastructure, quant and electronic-trading paths.</p>
+          <p>A small high-signal sample, intentionally mixing core SWE with systems, AI infrastructure, quant and electronic-trading paths.</p>
         </div>
         <div className={styles.jobs}>
           {d.jobs.map((j) => (
@@ -163,7 +193,7 @@ export default async function AiDashboardPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <h2>Source stack</h2>
-          <p>Every refresh should preserve the same core sources, record their dates, and flag methodology changes instead of silently splicing incompatible series.</p>
+          <p>Every refresh preserves the same core sources and flags methodology changes instead of silently mixing incompatible series.</p>
         </div>
         <div className={styles.sourceGrid}>
           {d.sources.map(([metric, source, url]) => (
@@ -175,7 +205,7 @@ export default async function AiDashboardPage() {
       </section>
 
       <footer className={styles.footer}>
-        Counts from public job boards are imperfect and can be rounded, duplicated or indexed late. The useful signal is repeated movement under a stable query. The dashboard should only escalate a pivot category after several consistent snapshots or corroboration across independent sources.
+        Public job-board counts are imperfect. Repeated movement under stable queries matters more than any single snapshot. Early-career weakness is treated as a canary; a stronger personal warning would be the same deterioration spreading into experienced-worker employment, mid/senior postings, compensation and employer breadth.
       </footer>
     </main>
   );
