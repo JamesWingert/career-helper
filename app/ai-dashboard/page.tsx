@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { dashboardData as d } from "./data";
+import { loadLatestSnapshot } from "../../lib/market-turso";
+import { dashboardData } from "./data";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
 
-export default function AiDashboardPage() {
+export default async function AiDashboardPage() {
+  const d = await loadLatestSnapshot(dashboardData);
   const maxTrueupTrend = Math.max(...d.trueup.categories.map((x) => x.trendPct));
   const maxBenchmark = Math.max(...d.benchmarks.map((x) => x.score));
 
