@@ -3,6 +3,7 @@ import { loadLatestSnapshot } from "../../lib/market-turso";
 import { dashboardData } from "./data";
 import { DashboardNav } from "./dashboard-nav";
 import styles from "./page.module.css";
+import shell from "./shell.module.css";
 
 export const dynamic = "force-dynamic";
 
@@ -25,12 +26,12 @@ export default async function AiDashboardPage() {
 
       <DashboardNav active="overview" />
 
-      <section className={styles.heroDecision}>
+      <section className={shell.heroDecision}>
         <div><span className={styles.kicker}>Bottom line</span><h2>Stay in SWE. Risk is low–moderate, not zero.</h2><p>The market is weak and increasingly senior-heavy, but current evidence still points more toward AI changing experienced SWE work than broadly replacing experienced engineers.</p></div>
         <aside><span>Pivot signal</span><strong>NO</strong><small>Trend: unchanged</small></aside>
       </section>
 
-      <section className={styles.changeGrid} aria-label="What changed">
+      <section className={shell.changeGrid} aria-label="What changed">
         <article><span>Mid-level demand</span><strong>WATCH</strong><p>Indeed's latest seniority analysis shows mid-level postings down while senior postings rose.</p></article>
         <article><span>Senior demand</span><strong>RISING</strong><p>Software development remains unusually senior-heavy.</p></article>
         <article><span>Experienced replacement</span><strong>WEAK EVIDENCE</strong><p>{experiencedSignal?.reading ?? "No comparable experienced decline"}</p></article>
@@ -40,8 +41,8 @@ export default async function AiDashboardPage() {
       </section>
 
       <section className={styles.section}>
-        <div className={styles.sectionHead}><h2>What changed since the last refresh?</h2><p>This will become the primary biweekly delta view once the repeated YOE and control-group series have enough history.</p></div>
-        <div className={styles.deltaList}>
+        <div className={styles.sectionHead}><h2>What changed since the last refresh?</h2><p>This becomes the primary biweekly delta view once the repeated YOE and control-group series have enough history.</p></div>
+        <div className={shell.deltaList}>
           <p><b>Personal risk:</b><span>Unchanged · low–moderate</span></p>
           <p><b>Mid-level hiring:</b><span>Negative relative to senior hiring · confidence high</span></p>
           <p><b>Experienced AI displacement:</b><span>No material strengthening · confidence medium</span></p>
@@ -52,7 +53,7 @@ export default async function AiDashboardPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHead}><h2>Distance from the pivot threshold</h2><p>A serious pivot requires several independent conditions to turn at the same time.</p></div>
-        <div className={styles.thresholdGrid}>
+        <div className={shell.thresholdGrid}>
           <article><span>4–10 YOE deterioration vs controls</span><strong>NOT MET</strong></article>
           <article><span>Credible AI-driven experienced headcount cuts</span><strong>NOT MET</strong></article>
           <article><span>Reliable realistic multi-day production autonomy</span><strong>NOT MET</strong></article>
@@ -61,8 +62,8 @@ export default async function AiDashboardPage() {
       </section>
 
       <section className={styles.section}>
-        <div className={styles.sectionHead}><h2>Go deeper</h2><p>The long analysis is now split into dedicated pages instead of one monotonous scroll.</p></div>
-        <div className={styles.framework}>
+        <div className={styles.sectionHead}><h2>Go deeper</h2><p>The long analysis is split into dedicated pages instead of one monotonous scroll.</p></div>
+        <div className={shell.deepLinks}>
           <Link href="/ai-dashboard/personal-risk"><span>01</span><strong>Personal risk</strong><p>YOE bands, accessibility, experience inflation, compensation, NYC depth.</p></Link>
           <Link href="/ai-dashboard/labor-market"><span>02</span><strong>Labor market</strong><p>Levels, 2w/4w/12w/YoY trends, controls and causality.</p></Link>
           <Link href="/ai-dashboard/ai-replacement"><span>03</span><strong>AI replacement</strong><p>Backfills, headcount, output, attribution and realistic autonomy.</p></Link>
