@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import DashboardShortcut from "./DashboardShortcut";
 
 export const metadata: Metadata = {
   title: "Career Gameplan — Jimmy Wingert",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               'try{var t=localStorage.getItem("career-gameplan-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}',
           }}
         />
+        <DashboardShortcut />
         {children}
       </body>
     </html>
