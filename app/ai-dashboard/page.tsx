@@ -19,6 +19,7 @@ export default async function AiDashboardPage() {
         <div>
           <div className={styles.kicker}>SWE / AI labor market monitor</div>
           <h1 className={styles.title}>Software engineering risk dashboard</h1>
+          <p className={styles.dek}>Built around the question that matters most for a roughly 5 YOE engineer: is AI making experienced software engineers harder to employ, or mainly changing how they work?</p>
           <Link className={styles.back} href="/">← Career gameplan</Link>
         </div>
         <aside className={styles.stamp}>
@@ -41,14 +42,14 @@ export default async function AiDashboardPage() {
             <p>{experiencedSignal?.reading ?? "Experienced workers stable"}</p>
           </article>
           <article className={styles.scoreCard}>
-            <span className={styles.scoreLabel}>SWE hiring</span>
-            <strong className={styles.scoreValue}>MIXED</strong>
-            <p>FRED {d.metrics[0].value} · TrueUp software +{d.trueup.softwareTrendPct}%</p>
+            <span className={styles.scoreLabel}>Mid-level hiring</span>
+            <strong className={styles.scoreValue}>WATCH</strong>
+            <p>Dedicated 3–5 and 5–8 YOE history begins next refresh.</p>
           </article>
           <article className={styles.scoreCard}>
-            <span className={styles.scoreLabel}>AI replacement risk</span>
-            <strong className={styles.scoreValue}>WATCH</strong>
-            <p>Frontier improves; long-horizon reliability still limits autonomy.</p>
+            <span className={styles.scoreLabel}>Experienced AI replacement</span>
+            <strong className={styles.scoreValue}>WEAK EVIDENCE</strong>
+            <p>No broad experienced-worker displacement signal yet.</p>
           </article>
           <article className={styles.scoreCard}>
             <span className={styles.scoreLabel}>NYC demand</span>
@@ -61,7 +62,14 @@ export default async function AiDashboardPage() {
             <p>Useful leading indicator; lower weight for your own job risk.</p>
           </article>
         </div>
-        <div className={styles.oneLine}><b>Bottom line:</b> stay in SWE, keep moving toward systems/domain-heavy work, and watch for deterioration spreading from junior hiring into experienced-worker employment and mid/senior demand.</div>
+        <div className={styles.oneLine}><b>Bottom line:</b> stay in SWE for now. The dashboard will only move toward a serious pivot signal if experienced hiring/employment weakens, AI-linked headcount substitution becomes credible, realistic production autonomy improves sharply, and an adjacent path has better risk-adjusted demand.</div>
+      </section>
+
+      <section className={styles.framework} aria-label="Dashboard framework">
+        <article><span>01</span><strong>Personal risk</strong><p>3–5, 5–8 and 8+ YOE demand, compensation, seniority mix and experience inflation.</p></article>
+        <article><span>02</span><strong>Labor causality</strong><p>SWE versus the broader white-collar market, separating AI from the hiring cycle.</p></article>
+        <article><span>03</span><strong>AI substitution</strong><p>Real production ownership, intervention rate, reliability and experienced-headcount evidence.</p></article>
+        <article><span>04</span><strong>Career response</strong><p>Where SWE demand is migrating and whether an adjacent path is actually stronger.</p></article>
       </section>
 
       <section className={styles.metrics} aria-label="Headline indicators">
@@ -76,8 +84,27 @@ export default async function AiDashboardPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHead}>
-          <h2>Hiring market</h2>
-          <p>Separate sources are kept separate. FRED/Indeed covers the broader U.S. posting index; TrueUp focuses on tech companies; LinkedIn gives a noisy but useful NYC pulse.</p>
+          <h2>1 · Personal risk for ~5 YOE SWE</h2>
+          <p>Mid-level and experienced demand now carries more weight than aggregate SWE counts or new-grad weakness.</p>
+        </div>
+        <div className={styles.riskGrid}>
+          <article className={styles.riskCard}><span className={styles.riskLabel}>3–5 YOE demand</span><strong className={styles.pending}>BASELINE NEXT REFRESH</strong><p>Track posting volume, employer breadth, compensation and time-to-hire.</p></article>
+          <article className={styles.riskCard}><span className={styles.riskLabel}>5–8 YOE demand</span><strong className={styles.pending}>BASELINE NEXT REFRESH</strong><p>Separates healthy senior demand from a possible squeeze on true mid-level roles.</p></article>
+          <article className={styles.riskCard}><span className={styles.riskLabel}>8+ YOE / senior demand</span><strong className={styles.pending}>BASELINE NEXT REFRESH</strong><p>Used as a comparison group, not as a proxy for your own market.</p></article>
+          <article className={styles.riskCard}><span className={styles.riskLabel}>Experience inflation</span><strong className={styles.pending}>BASELINE NEXT REFRESH</strong><p>Watch 2–5 YOE jobs drift toward 5–8+ YOE requirements.</p></article>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHead}>
+          <h2>2 · Hiring market and causality</h2>
+          <p>Separate sources stay separate. The new control-group layer will show whether SWE is uniquely weak or moving with the broader professional market.</p>
+        </div>
+        <div className={styles.controlStrip}>
+          <div><span>Software hiring</span><strong>FRED {d.metrics[0].value}</strong><small>Feb 2020 = 100</small></div>
+          <div><span>Overall postings control</span><strong className={styles.pending}>BASELINE NEXT REFRESH</strong><small>Indeed/FRED overall U.S. postings</small></div>
+          <div><span>White-collar controls</span><strong className={styles.pending}>BASELINE NEXT REFRESH</strong><small>Comparable high-pay professional categories</small></div>
+          <div><span>SWE relative weakness</span><strong className={styles.pending}>BASELINE NEXT REFRESH</strong><small>Interpretation only; raw series remain separate</small></div>
         </div>
         <div className={styles.twoCol}>
           <article className={styles.panel}>
@@ -106,12 +133,12 @@ export default async function AiDashboardPage() {
               <b className={styles.linkArrow}>↗</b>
             </a>
             <a className={styles.linkCard} href={d.trueup.chartSource} target="_blank" rel="noreferrer">
-              <span><strong>TrueUp Tech Trends</strong><br /><span>Source for the widely shared open-tech-jobs graphics; this dashboard records the data instead of depending on screenshots.</span></span>
+              <span><strong>TrueUp Tech Trends</strong><br /><span>Recorded separately from LinkedIn and FRED rather than blended into a fake composite.</span></span>
               <b className={styles.linkArrow}>↗</b>
             </a>
             <div className={styles.history}>
               <strong>Trend history starts here</strong>
-              <p>First normalized snapshot: {d.history[0].date}. After several cycles this panel can show 4-week, 12-week and year-over-year direction for each source rather than one-off counts.</p>
+              <p>First normalized snapshot: {d.history[0].date}. Repeated measurements will support 4-week, 12-week and year-over-year direction.</p>
             </div>
           </article>
         </div>
@@ -119,8 +146,24 @@ export default async function AiDashboardPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHead}>
+          <h2>Experienced-SWE replacement evidence</h2>
+          <p>This is deliberately separate from coding benchmarks. A model getting better at tasks is not the same thing as firms replacing experienced engineers.</p>
+        </div>
+        <div className={styles.replacementPanel}>
+          <div className={styles.replacementHeadline}><span className={styles.replacementDot} /> <strong>CURRENT READ: WEAK EVIDENCE OF EXPERIENCED REPLACEMENT</strong></div>
+          <div className={styles.replacementGrid}>
+            <article><span>Mid-level hiring deterioration</span><strong>WATCH</strong><p>Dedicated seniority history begins next refresh.</p></article>
+            <article><span>Reduced backfills</span><strong>NOT BASELINED</strong><p>Track whether firms stop replacing departing experienced engineers.</p></article>
+            <article><span>Experienced headcount cuts attributed to AI</span><strong>WEAK</strong><p>Require credible attribution plus actual headcount evidence.</p></article>
+            <article><span>Output maintained with fewer engineers</span><strong>WEAK</strong><p>Require measurable output or productivity data, not executive anecdotes.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHead}>
           <h2>Observed labor effects</h2>
-          <p>For your own risk, experienced-worker employment and mid/senior demand matter more than the early-career canary.</p>
+          <p>Experienced-worker evidence comes first. Early-career weakness remains a canary, not the main personal-risk signal.</p>
         </div>
         <div className={styles.signalGrid}>
           {d.signals.map((s) => (
@@ -139,9 +182,10 @@ export default async function AiDashboardPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHead}>
-          <h2>Frontier coding capability</h2>
-          <p>Harder agent benchmarks and long-horizon evaluations are more relevant here than isolated code-generation benchmarks.</p>
+          <h2>3 · AI substitution capability</h2>
+          <p>Benchmarks are treated as capability evidence. Realistic task duration, reliability, intervention rate, cost and messy production ownership matter more than headline scores.</p>
         </div>
+        <div className={styles.capabilityNote}><strong>What would materially change the risk read:</strong> agents reliably handling architecture, debugging, incidents, migrations, cross-service integration, security, performance and sustained multi-day production ownership with low human intervention.</div>
         <table className={styles.benchmark}>
           <thead><tr><th>Model</th><th>DeepSWE</th><th>Reported cost</th><th>Evaluation</th></tr></thead>
           <tbody>
@@ -159,8 +203,21 @@ export default async function AiDashboardPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHead}>
-          <h2>Pivot radar</h2>
-          <p>Each category is tracked for sustained posting growth, NYC depth, compensation, employer breadth and transferability from software engineering.</p>
+          <h2>4 · Skill migration and career response</h2>
+          <p>Track where engineering demand is moving rather than treating “software engineer” as one homogeneous job.</p>
+        </div>
+        <div className={styles.skillGrid}>
+          {[
+            ["Backend / application", "CORE BASELINE"],
+            ["Platform / distributed systems", "TRACKING"],
+            ["AI / ML infrastructure", "TRACKING"],
+            ["Data / ML infrastructure", "START NEXT REFRESH"],
+            ["Security", "START NEXT REFRESH"],
+            ["Developer productivity", "START NEXT REFRESH"],
+            ["FDE / Sales Engineering", "TRACKING"],
+            ["Quant / eTrading / market data", "TRACKING"],
+            ["Hardware / AI compute software", "TRACKING"],
+          ].map(([name, status]) => <article key={name}><strong>{name}</strong><span>{status}</span></article>)}
         </div>
         <div className={styles.radar}>
           {d.pivotRadar.map((r) => (
@@ -177,7 +234,7 @@ export default async function AiDashboardPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <h2>Current NYC role sample</h2>
-          <p>A small high-signal sample, intentionally mixing core SWE with systems, AI infrastructure, quant and electronic-trading paths.</p>
+          <p>A small high-signal sample mixing core SWE with systems, AI infrastructure, quant and electronic-trading paths.</p>
         </div>
         <div className={styles.jobs}>
           {d.jobs.map((j) => (
@@ -193,7 +250,7 @@ export default async function AiDashboardPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <h2>Source stack</h2>
-          <p>Every refresh preserves the same core sources and flags methodology changes instead of silently mixing incompatible series.</p>
+          <p>Core sources stay stable across refreshes. New sources are added only when they improve seniority, causality, replacement or skill-migration evidence.</p>
         </div>
         <div className={styles.sourceGrid}>
           {d.sources.map(([metric, source, url]) => (
@@ -205,7 +262,7 @@ export default async function AiDashboardPage() {
       </section>
 
       <footer className={styles.footer}>
-        Public job-board counts are imperfect. Repeated movement under stable queries matters more than any single snapshot. Early-career weakness is treated as a canary; a stronger personal warning would be the same deterioration spreading into experienced-worker employment, mid/senior postings, compensation and employer breadth.
+        Decision rule: do not recommend a serious pivot from SWE unless multiple signals corroborate each other—sustained 4–10 YOE deterioration relative to the broader market, credible AI-linked experienced-headcount substitution, reliable realistic multi-day production autonomy, and a stronger adjacent market that is actually accessible from your experience.
       </footer>
     </main>
   );
