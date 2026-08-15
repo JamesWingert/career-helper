@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./dashboard-shortcut.css";
 import DashboardShortcut from "./DashboardShortcut";
 
 export const metadata: Metadata = {
