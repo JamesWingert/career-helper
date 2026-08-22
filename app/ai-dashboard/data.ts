@@ -69,6 +69,32 @@ export const dashboardData = {
     source: "https://www.linkedin.com/jobs/search/?geoId=105080838&keywords=software%20engineer&location=New%20York%2C%20United%20States",
     note: "LinkedIn rounds public result counts and search indexing can lag. We track the same query every cycle for directional movement.",
   },
+  marketDetails: {
+    overallPostings: { value: 102.09, asOf: "2026-07-24" },
+    seniority: {
+      seniorSharePct: 69.3,
+      midChangePct: -6.7,
+      seniorChangePct: 13.5,
+      comparison: "Change since January 2025",
+      source: "Indeed Hiring Lab seniority analysis",
+    },
+    linkedinSeniority: {
+      entry: 525,
+      associate: 159,
+      midSenior: 3490,
+      anyTime: 4978,
+      pastMonth: 3986,
+      pastWeek: 1489,
+      pastDay: 370,
+      asOf: "2026-08-14",
+    },
+    bls: {
+      growthPct: 15.8,
+      jobsAdded: 267700,
+      period: "2024–2034",
+      source: "https://www.bls.gov/opub/ted/2026/artificial-intelligence-information-technology-and-employment-2024-34.htm",
+    },
+  },
   benchmarks: [
     { model: "Claude Opus 5", score: 74, cost: "$11.84", note: "DeepSWE v1.1" },
     { model: "GPT-5.6 Sol", score: 73, cost: "$8.39", note: "DeepSWE v1.1" },
