@@ -203,7 +203,7 @@ export default function Home() {
       <div className="goal"><span>North star</span><strong>Maintain $200k+ optionality through senior technical ownership.</strong></div>
     </section>
 
-    <nav aria-label="Career branches">{branches.map((candidate, index) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{index + 1} · {candidate.name}</button>)}<button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">{theme === "dark" ? "☀ Light" : "☾ Dark"}</button></nav>
+    <nav aria-label="Career branches">{branches.map((candidate, index) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{index + 1} · {candidate.name}</button>)}<a className="controls-path-link" href="/controls-scada">6 · Controls / SCADA / OT</a><button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">{theme === "dark" ? "☀ Light" : "☾ Dark"}</button></nav>
 
     <section className="status">
       <div><span className="eyebrow">CURRENT BRANCH</span><h2>{selected.name}</h2><p>{selected.fit}</p></div>
