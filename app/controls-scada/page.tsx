@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
@@ -136,14 +135,11 @@ const readyItems = [
 
 export default function ControlsScadaPage() {
   const [done, setDone] = useState<Record<string, boolean>>({});
-  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem("controls-scada-plan-v1");
       if (saved) setDone(JSON.parse(saved));
-      const storedTheme = localStorage.getItem("career-gameplan-theme");
-      setTheme(storedTheme === "dark" || storedTheme === "light" ? storedTheme : document.documentElement.dataset.theme === "dark" ? "dark" : "light");
     } catch {}
   }, []);
 
@@ -155,39 +151,27 @@ export default function ControlsScadaPage() {
     });
   };
 
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("career-gameplan-theme", next); } catch {}
-  };
-
   const completed = stages.filter((stage) => done[stage.id]).length;
 
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <span className={styles.eyebrow}>JIMMY WINGERT · CAREER GAMEPLAN · RECOMMENDED PHYSICAL-INFRASTRUCTURE PATH</span>
-        <h1>Controls / SCADA /<br />OT Automation</h1>
-        <p>Start in water or industrial controls to earn real PLC, instrumentation, and commissioning experience. Then move toward higher-paying data-center controls, SCADA software, or OT cybersecurity.</p>
-        <div className={styles.goal}><span>Realistic strategy</span><strong>Study beside your current job. Switch only for an actual offer worth the pay cut, travel, and on-site tradeoff.</strong></div>
+        <h1>Controls, SCADA, and OT</h1>
+        <p>Build PLC, instrumentation, and commissioning experience in water or industrial controls. Later, move toward data-center controls, SCADA software, or OT security.</p>
       </section>
 
       <nav className={styles.nav} aria-label="Controls career plan sections">
-        <Link className={styles.back} href="/">← All career paths</Link>
-        <a href="#plan">6–12 month plan</a>
-        <a href="#tools">Tools + hardware</a>
+        <a href="#plan">Plan</a>
+        <a href="#tools">Tools</a>
         <a href="#portfolio">Portfolio</a>
-        <a href="#jobs">Jobs + pay</a>
-        <a href="#ready">Ready to apply</a>
-        <button onClick={toggleTheme} aria-label="Toggle dark mode">{theme === "dark" ? "☀ Light" : "☾ Dark"}</button>
+        <a href="#jobs">Jobs and pay</a>
+        <a href="#ready">Apply checklist</a>
       </nav>
 
       <section className={styles.status}>
         <div>
-          <span className={styles.eyebrow}>WHAT THE WORK ACTUALLY IS</span>
-          <h2>Software that touches pumps, valves, motors, sensors, and power.</h2>
-          <p>A PLC runs deterministic control logic. Field instruments report the physical process. SCADA gives operators a plant-wide view, alarms, history, and controlled commands. The engineer connects all of it, tests failure behavior, commissions it on-site, and troubleshoots from the screen down to wiring.</p>
+          <h2>Software connected to physical systems.</h2>
+          <p>Engineers connect PLC logic, instruments, networks, SCADA, alarms, and historians—then commission and troubleshoot the full chain.</p>
         </div>
         <div className={styles.progress}>
           <strong>{completed}<small> / {stages.length}</small></strong>
@@ -198,8 +182,7 @@ export default function ControlsScadaPage() {
 
       <section className={styles.twoColumn}>
         <article>
-          <span className={styles.eyebrow}>WHY SWE TRANSFERS</span>
-          <h3>You are filling a physical-world gap, not starting from zero.</h3>
+          <h3>What transfers from SWE</h3>
           <ul>
             <li>Python/scripting → Ignition scripting, test tools, and data integration</li>
             <li>SQL → historians, trends, event analysis, and reporting</li>
@@ -209,17 +192,16 @@ export default function ControlsScadaPage() {
           </ul>
         </article>
         <article className={styles.boundary}>
-          <span className={styles.eyebrow}>THE ACTUAL GAP</span>
-          <h3>Hardware, process, and field judgment.</h3>
+          <h3>The actual gap</h3>
           <p>You still need PLC logic, 24VDC I/O, instrumentation, drawings, motor-control concepts, commissioning discipline, and comfort working on-site. A CS degree is relevant to many controls/OT roles; a PE license or another engineering degree is not the default price of entry for this path.</p>
         </article>
       </section>
 
       <section id="top-tier" className={styles.topTier}>
         <div>
-          <span className={styles.eyebrow}>THE “FAANG-LEVEL” ENDGAME</span>
-          <h2>Hyperscale / AI data-center controls and SCADA software.</h2>
-          <p>There is no single prestige ladder in controls, but the closest combination of pay, technical scope, and selective employers is owning the power, cooling, BMS, EPMS, PLC, SCADA, and commissioning stack behind hyperscale or AI data centers.</p>
+          <span className={styles.eyebrow}>CAREER CEILING</span>
+          <h2>Data-center controls and SCADA software.</h2>
+          <p>The strongest pay and technical scope sit around power, cooling, BMS, EPMS, PLC, SCADA, and commissioning for hyperscale data centers.</p>
         </div>
         <dl>
           <div><dt>Target titles</dt><dd>Data Center Controls Engineer → Senior / Staff / Principal Controls Engineer, Controls Architect, or SCADA Software Engineer</dd></div>

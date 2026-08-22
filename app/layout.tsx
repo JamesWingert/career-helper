@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import "./dashboard-shortcut.css";
-import DashboardShortcut from "./DashboardShortcut";
+import SiteHeader from "./SiteHeader";
 
 export const metadata: Metadata = {
   title: "Career Gameplan — Jimmy Wingert",
@@ -13,8 +12,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f5ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#171912" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f6f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#171716" },
   ],
 };
 
@@ -28,7 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               'try{var t=localStorage.getItem("career-gameplan-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}',
           }}
         />
-        <DashboardShortcut />
+        <SiteHeader />
         {children}
       </body>
     </html>

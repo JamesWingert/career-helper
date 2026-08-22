@@ -156,23 +156,9 @@ const branches: Branch[] = [
 
 export default function Home() {
   const [branch, setBranch] = useState("fde");
-  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
   const [done, setDone] = useState<Record<string, boolean>>({});
   const [loaded, setLoaded] = useState(false);
   const selected = branches.find((candidate) => candidate.id === branch) ?? branches[0];
-
-  useEffect(() => {
-    const stored = localStorage.getItem("career-gameplan-theme");
-    if (stored === "dark" || stored === "light") setTheme(stored);
-    else setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  }, []);
-
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("career-gameplan-theme", next); } catch {}
-  };
 
   useEffect(() => {
     try {
@@ -195,28 +181,26 @@ export default function Home() {
   const completed = trackModules.filter((module) => done[module.id]).length;
   const toggle = (id: string) => setDone((old) => ({ ...old, [id]: !old[id] }));
 
-  return <main>
+  return <main className="career-page">
     <section className="hero">
-      <div className="eyebrow">JIMMY WINGERT · CAREER GAMEPLAN</div>
-      <h1>Build the judgment<br />AI won’t hand you.</h1>
-      <p>A concrete shared syllabus for production AI systems and deployment, followed by deep branches you can choose using actual market evidence.</p>
-      <div className="goal"><span>North star</span><strong>Maintain $200k+ optionality through senior technical ownership.</strong></div>
+      <h1>Career paths</h1>
+      <p>A focused curriculum for staying technical, widening your options, and protecting $200k+ earning potential.</p>
     </section>
 
-    <nav aria-label="Career branches">{branches.map((candidate, index) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{index + 1} · {candidate.name}</button>)}<a className="controls-path-link" href="/controls-scada">6 · Controls / SCADA / OT</a><button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">{theme === "dark" ? "☀ Light" : "☾ Dark"}</button></nav>
+    <nav className="branch-tabs" aria-label="Career branches">{branches.map((candidate) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{candidate.name}</button>)}</nav>
 
     <section className="status">
-      <div><span className="eyebrow">CURRENT BRANCH</span><h2>{selected.name}</h2><p>{selected.fit}</p></div>
+      <div><h2>{selected.name}</h2><p>{selected.fit}</p></div>
       <div className="progress"><strong>{completed}<small> / {trackModules.length}</small></strong><span>modules complete</span><div><i style={{ width: `${(completed / trackModules.length) * 100}%` }} /></div></div>
     </section>
 
     <section className="overview">
-      <article className="why"><span className="eyebrow">WHY THE SHARED CORE EXISTS</span><h3>It trains the layer common to every path.</h3><p>Performance diagnosis, statistical judgment, integration failure, and architecture decisions show up in AI platform, GenAI/evals, FDE, and trading engineering. The core gives you 12 weeks of reusable work before you spend months on a narrower domain.</p><p className="skip"><b>Already covered by your résumé:</b> Python, AWS deployment, ML pipelines, model serving, streaming, distributed systems, LLM integration, and production reliability.</p><p className="resource-note"><b>How to use the reading list:</b> Follow the named chapters, lectures, labs, or documentation sections—not the whole resource unless it is explicitly assigned.</p></article>
-      <article className="branch-card"><span className="eyebrow">{selected.eyebrow}</span><h3>What this branch adds</h3><ul>{selected.focus.map((item) => <li key={item}>{item}</li>)}</ul></article>
+      <article className="why"><h3>Shared foundation</h3><p>Performance diagnosis, statistical judgment, integrations, and architecture decisions transfer across every path.</p><p className="skip"><b>Skip:</b> Python, AWS, ML pipelines, model serving, streaming, distributed systems, and production reliability. Your résumé already proves them.</p><p className="resource-note">Use only the assigned chapters or lessons inside each module.</p></article>
+      <article className="branch-card"><h3>Branch focus</h3><ul>{selected.focus.map((item) => <li key={item}>{item}</li>)}</ul></article>
     </section>
 
     <section className="syllabus">
-      <header><span className="eyebrow">12-WEEK SHARED SYLLABUS · ~5 HOURS/WEEK</span><h2>Common foundation</h2><p>Ordered by AI-resistance: evaluation judgment and discovery first, then the measurement and integration mechanics you still need to know cold. All four phases deepen every branch.</p></header>
+      <header><h2>12-week foundation</h2><p>About five hours per week. Finish the shared work before specializing.</p></header>
       {sharedPhases.map((phase) => <section className="phase" key={phase.title}>
         <div className="phase-heading"><div><span>{phase.weeks}</span><h3>{phase.title}</h3></div><p>{phase.why}</p></div>
         <div className="module-grid">{phase.modules.map((module) => <ModuleCard key={module.id} module={module} checked={!!done[module.id]} onToggle={toggle} />)}</div>
@@ -224,18 +208,18 @@ export default function Home() {
     </section>
 
     <section className="branch-section">
-      <header><span className="eyebrow">DEEP-DIVE BRANCH</span><h2>{selected.name}</h2><p>Complete this after the shared core—or start selectively if interviews expose a specific gap.</p></header>
+      <header><h2>{selected.name} modules</h2><p>Start after the foundation, or use selectively for an interview gap.</p></header>
       <div className="module-grid branch-modules">{selected.modules.map((module) => <ModuleCard key={module.id} module={module} checked={!!done[module.id]} onToggle={toggle} />)}</div>
     </section>
 
     <section className="market-grid">
-      <article><span className="eyebrow">SEARCH THESE TITLES</span><h3>Target roles</h3><div className="pills">{selected.targets.map((target) => <span key={target}>{target}</span>)}</div></article>
-      <article className="avoid"><span className="eyebrow">FILTER THE MARKET</span><h3>Walk away from</h3><ul>{selected.avoid.map((item) => <li key={item}>{item}</li>)}</ul></article>
+      <article><h3>Target roles</h3><div className="pills">{selected.targets.map((target) => <span key={target}>{target}</span>)}</div></article>
+      <article className="avoid"><h3>Skip these roles</h3><ul>{selected.avoid.map((item) => <li key={item}>{item}</li>)}</ul></article>
     </section>
 
-    <section className="role-proof"><header><span className="eyebrow">CURRENT ROLE CHECK</span><h2>Why this syllabus maps to the work</h2><p>Representative current postings—not a promise that every company uses the same title.</p></header><div>{roleEvidence[selected.id].map((role) => <a href={role.url} target="_blank" rel="noreferrer" key={`${role.company}-${role.title}`}><span>{role.company}</span><h3>{role.title}</h3><p>{role.signals}</p><b>View posting ↗</b></a>)}</div></section>
+    <section className="role-proof"><header><h2>Current role examples</h2></header><div>{roleEvidence[selected.id].map((role) => <a href={role.url} target="_blank" rel="noreferrer" key={`${role.company}-${role.title}`}><span>{role.company}</span><h3>{role.title}</h3><p>{role.signals}</p><b>View posting ↗</b></a>)}</div></section>
 
-    <footer>Built around your actual Amazon ML/GenAI platform experience. The shared core is reusable; each branch is a deliberate second phase.</footer>
+    <footer>Built around your Amazon ML/GenAI platform experience.</footer>
   </main>;
 }
 
