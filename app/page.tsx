@@ -183,20 +183,31 @@ export default function Home() {
 
   return <main className="career-page">
     <section className="hero">
-      <h1>Career paths</h1>
-      <p>A focused curriculum for staying technical, widening your options, and protecting $200k+ earning potential.</p>
+      <div className="hero-copy">
+        <span className="page-kicker">Career gameplan</span>
+        <h1>Career paths</h1>
+        <p>Compare five technical directions built around your existing ML-platform experience. Each uses the same foundation, then branches into its own study plan and portfolio proof.</p>
+      </div>
+      <aside className="hero-note">
+        <span>Best current fit</span>
+        <strong>FDE / AI deployment</strong>
+        <p>Closest to your résumé and the fastest path to broader end-to-end ownership.</p>
+      </aside>
     </section>
 
-    <nav className="branch-tabs" aria-label="Career branches">{branches.map((candidate) => <button className={branch === candidate.id ? "active" : ""} onClick={() => setBranch(candidate.id)} key={candidate.id}>{candidate.name}</button>)}</nav>
+    <section className="branch-picker">
+      <span>Pick a path to see its curriculum and target roles</span>
+      <nav className="branch-tabs" aria-label="Career branches">{branches.map((candidate) => <button className={branch === candidate.id ? "active" : ""} aria-pressed={branch === candidate.id} onClick={() => setBranch(candidate.id)} key={candidate.id}><small>{candidate.eyebrow}</small><b>{candidate.name}</b></button>)}</nav>
+    </section>
 
     <section className="status">
-      <div><h2>{selected.name}</h2><p>{selected.fit}</p></div>
+      <div><h2>{selected.name}</h2><p>{selected.fit}</p><div className="focus-pills">{selected.focus.map((item) => <span key={item}>{item}</span>)}</div></div>
       <div className="progress"><strong>{completed}<small> / {trackModules.length}</small></strong><span>modules complete</span><div><i style={{ width: `${(completed / trackModules.length) * 100}%` }} /></div></div>
     </section>
 
     <section className="overview">
       <article className="why"><h3>Shared foundation</h3><p>Performance diagnosis, statistical judgment, integrations, and architecture decisions transfer across every path.</p><p className="skip"><b>Skip:</b> Python, AWS, ML pipelines, model serving, streaming, distributed systems, and production reliability. Your résumé already proves them.</p><p className="resource-note">Use only the assigned chapters or lessons inside each module.</p></article>
-      <article className="branch-card"><h3>Branch focus</h3><ul>{selected.focus.map((item) => <li key={item}>{item}</li>)}</ul></article>
+      <article className="branch-card"><h3>How to use it</h3><ul><li>Finish the shared 12 weeks first</li><li>Add the selected branch modules</li><li>Use the proof artifacts in interviews</li></ul></article>
     </section>
 
     <section className="syllabus">

@@ -19,13 +19,31 @@ export default async function AiDashboardPage() {
   const earlyCareer = d.signals.find((signal) => signal.signal === "Early-career SWE employment");
   const businessAgents = d.signals.find((signal) => signal.signal === "AI agents in business");
   const benchmarkReliability = d.signals.find((signal) => signal.signal === "Benchmark reliability");
+  const snapshotMetrics = [
+    { label: "U.S. software postings", value: sweIndex.toFixed(2), comparison: `${signed(sweIndex - 100)} vs. Feb. 2020`, asOf: d.metrics[0].note.split(" · ")[0], source: "FRED / Indeed", href: d.sources[0][2], tone: "down" },
+    { label: "Overall U.S. postings", value: overallIndex.toFixed(2), comparison: `${signed(overallIndex - 100)} vs. Feb. 2020`, asOf: details.overallPostings.asOf, source: "FRED / Indeed", href: "https://fred.stlouisfed.org/series/IHLIDXUS", tone: "neutral" },
+    { label: "SWE gap vs. overall", value: signed(relativeGap), comparison: `${(sweIndex - overallIndex).toFixed(2)} index points`, asOf: details.overallPostings.asOf, source: "Calculated from FRED series", tone: "down" },
+    { label: "TrueUp software openings", value: d.trueup.softwareJobs.toLocaleString(), comparison: `${signed(d.trueup.softwareTrendPct)} TrueUp trend`, asOf: d.trueup.asOf, source: "TrueUp", href: d.trueup.source, tone: "up" },
+    { label: "NYC LinkedIn search", value: d.linkedin.countLabel, comparison: "Rounded public result count", asOf: d.linkedin.asOf, source: "LinkedIn", href: d.linkedin.source, tone: "neutral" },
+    { label: "BLS 10-year projection", value: `+${details.bls.growthPct}%`, comparison: `+${details.bls.jobsAdded.toLocaleString()} jobs, ${details.bls.period}`, asOf: "2026 release", source: "BLS", href: details.bls.source, tone: "up" },
+  ];
+  const aiEvidence = [
+    { label: "Early-career SWE employment", value: earlyCareer?.reading ?? "Nearly -20% vs. 2024", scope: "Ages 22–25; strongest negative labor signal", source: "Stanford", href: earlyCareer?.source, tone: "warning" },
+    { label: "Experienced-worker employment", value: experienced?.reading ?? "No comparable decline", scope: "Expansion remains visible in older groups", source: "Stanford", href: experienced?.source, tone: "steady" },
+    { label: "Experienced-SWE substitution", value: "No qualifying observation stored", scope: "Requires headcount reduction, stable output, and explicit AI attribution", source: "Company disclosures", href: "https://www.sec.gov/edgar/search/", tone: "steady" },
+    { label: "AI agents in business functions", value: businessAgents?.reading ?? "Single digits", scope: "Adoption remains early", source: "Stanford AI Index", href: businessAgents?.source, tone: "steady" },
+    { label: "Autonomous task horizon", value: d.metrics[5].value, scope: "50% success horizon; not a workday-equivalent claim", source: "METR", href: d.sources[6][2], tone: "capability" },
+    { label: "Top DeepSWE score", value: `${d.benchmarks[0].score}%`, scope: `${d.benchmarks[0].model} · ${d.benchmarks[0].note}`, source: "DeepSWE", href: d.sources[7][2], tone: "capability" },
+    { label: "SWE-Bench Pro caveat", value: benchmarkReliability?.reading ?? "~30% estimated broken", scope: "Benchmark-quality warning", source: "Analysis", href: benchmarkReliability?.source, tone: "warning" },
+  ];
 
   return (
     <main className={styles.page}>
       <header className={styles.top}>
         <div>
+          <span className={styles.topKicker}>Evidence dashboard</span>
           <h1 className={styles.title}>SWE market</h1>
-          <p className={styles.dek}>Current hiring, experience-level demand, AI displacement evidence, and adjacent technical markets.</p>
+          <p className={styles.dek}>Hiring demand, experience-level shifts, AI displacement evidence, and technical paths—kept separate so one noisy signal does not tell the whole story.</p>
         </div>
         <dl className={styles.stamp}>
           <div><dt>Data through</dt><dd>{d.updatedAt}</dd></div>
@@ -57,20 +75,15 @@ export default async function AiDashboardPage() {
       <section className={styles.section} id="snapshot">
         <header className={styles.sectionHead}>
           <div><span>01</span><h2>Market snapshot</h2></div>
-          <p>Values are kept separate; no composite risk score.</p>
+          <p>Six signals, each with its own scope and date.</p>
         </header>
-        <div className={styles.tableWrap}>
-          <table className={styles.dataTable}>
-            <thead><tr><th>Measure</th><th>Current</th><th>Comparison</th><th>As of</th><th>Source</th></tr></thead>
-            <tbody>
-              <tr><td>U.S. software-development postings</td><td className={styles.value}>{sweIndex.toFixed(2)}</td><td>{signed(sweIndex - 100)} vs. Feb. 2020</td><td>{d.metrics[0].note.split(" · ")[0]}</td><td><a href={d.sources[0][2]} target="_blank" rel="noreferrer">FRED / Indeed ↗</a></td></tr>
-              <tr><td>Overall U.S. postings</td><td className={styles.value}>{overallIndex.toFixed(2)}</td><td>{signed(overallIndex - 100)} vs. Feb. 2020</td><td>{details.overallPostings.asOf}</td><td><a href="https://fred.stlouisfed.org/series/IHLIDXUS" target="_blank" rel="noreferrer">FRED / Indeed ↗</a></td></tr>
-              <tr><td>SWE relative to overall postings</td><td className={styles.value}>{signed(relativeGap)}</td><td>{(sweIndex - overallIndex).toFixed(2)} index points</td><td>{details.overallPostings.asOf}</td><td>Calculated from the two series above</td></tr>
-              <tr><td>TrueUp software openings</td><td className={styles.value}>{d.trueup.softwareJobs.toLocaleString()}</td><td>{signed(d.trueup.softwareTrendPct)} TrueUp trend</td><td>{d.trueup.asOf}</td><td><a href={d.trueup.source} target="_blank" rel="noreferrer">TrueUp ↗</a></td></tr>
-              <tr><td>NYC LinkedIn software-engineer search</td><td className={styles.value}>{d.linkedin.countLabel}</td><td>Repeatable public query; rounded count</td><td>{d.linkedin.asOf}</td><td><a href={d.linkedin.source} target="_blank" rel="noreferrer">LinkedIn ↗</a></td></tr>
-              <tr><td>BLS software-developer projection</td><td className={styles.value}>+{details.bls.growthPct}%</td><td>+{details.bls.jobsAdded.toLocaleString()} jobs, {details.bls.period}</td><td>2026 release</td><td><a href={details.bls.source} target="_blank" rel="noreferrer">BLS ↗</a></td></tr>
-            </tbody>
-          </table>
+        <div className={styles.metricGrid}>
+          {snapshotMetrics.map((metric) => <article className={styles[metric.tone]} key={metric.label}>
+            <span>{metric.label}</span>
+            <strong>{metric.value}</strong>
+            <p>{metric.comparison}</p>
+            <footer><time>{metric.asOf}</time>{metric.href ? <a href={metric.href} target="_blank" rel="noreferrer">{metric.source} ↗</a> : <span>{metric.source}</span>}</footer>
+          </article>)}
         </div>
         <details className={styles.details}>
           <summary>Revelio actual-worker baseline · {revelio.occupation}</summary>
@@ -119,15 +132,10 @@ export default async function AiDashboardPage() {
             </table>
           </article>
         </div>
-        <div className={styles.tableWrap}>
-          <table className={styles.dataTable}>
-            <thead><tr><th>Indeed seniority measure</th><th>Current</th><th>Comparison window</th><th>What it says</th></tr></thead>
-            <tbody>
-              <tr><td>Mid-level postings</td><td className={styles.value}>{signed(details.seniority.midChangePct)}</td><td>{details.seniority.comparison}</td><td>Demand deteriorated.</td></tr>
-              <tr><td>Senior postings</td><td className={styles.value}>{signed(details.seniority.seniorChangePct)}</td><td>{details.seniority.comparison}</td><td>Demand improved.</td></tr>
-              <tr><td>Senior share of software-development postings</td><td className={styles.value}>{details.seniority.seniorSharePct}%</td><td>Q1 2026</td><td>The market is heavily senior-weighted.</td></tr>
-            </tbody>
-          </table>
+        <div className={styles.signalStrip}>
+          <article><span>Mid-level postings</span><strong className={styles.negative}>{signed(details.seniority.midChangePct)}</strong><p>{details.seniority.comparison} · demand deteriorated</p></article>
+          <article><span>Senior postings</span><strong className={styles.positive}>{signed(details.seniority.seniorChangePct)}</strong><p>{details.seniority.comparison} · demand improved</p></article>
+          <article><span>Senior share</span><strong>{details.seniority.seniorSharePct}%</strong><p>Q1 2026 · heavily senior-weighted</p></article>
         </div>
         <details className={styles.details}>
           <summary>Granular YOE, skills, salary, and posting-persistence layer</summary>
@@ -148,19 +156,12 @@ export default async function AiDashboardPage() {
           <div><span>03</span><h2>AI impact</h2></div>
           <p>Observed labor outcomes first; model capability second.</p>
         </header>
-        <div className={styles.tableWrap}>
-          <table className={styles.dataTable}>
-            <thead><tr><th>Measure</th><th>Current evidence</th><th>Scope</th><th>Source</th></tr></thead>
-            <tbody>
-              <tr><td>Early-career SWE employment</td><td className={styles.value}>{earlyCareer?.reading ?? "Nearly -20% vs. 2024"}</td><td>Ages 22–25; strongest negative labor signal</td><td><a href={earlyCareer?.source} target="_blank" rel="noreferrer">Stanford ↗</a></td></tr>
-              <tr><td>Experienced-worker employment</td><td className={styles.value}>{experienced?.reading ?? "No comparable decline"}</td><td>Expansion remains visible in older groups</td><td><a href={experienced?.source} target="_blank" rel="noreferrer">Stanford ↗</a></td></tr>
-              <tr><td>Experienced-SWE company substitution</td><td className={styles.value}>No qualifying observation stored</td><td>Requires experienced headcount or backfill reduction, stable/rising output, and explicit AI attribution</td><td><a href="https://www.sec.gov/edgar/search/" target="_blank" rel="noreferrer">SEC / company disclosures ↗</a></td></tr>
-              <tr><td>AI-agent deployment in business functions</td><td className={styles.value}>{businessAgents?.reading ?? "Single digits"}</td><td>Adoption remains early</td><td><a href={businessAgents?.source} target="_blank" rel="noreferrer">Stanford AI Index ↗</a></td></tr>
-              <tr><td>Frontier autonomous task horizon</td><td className={styles.value}>{d.metrics[5].value}</td><td>50% success horizon; not a workday-equivalent claim</td><td><a href={d.sources[6][2]} target="_blank" rel="noreferrer">METR ↗</a></td></tr>
-              <tr><td>Top DeepSWE score</td><td className={styles.value}>{d.benchmarks[0].score}%</td><td>{d.benchmarks[0].model} · {d.benchmarks[0].note}</td><td><a href={d.sources[7][2]} target="_blank" rel="noreferrer">DeepSWE ↗</a></td></tr>
-              <tr><td>SWE-Bench Pro reliability warning</td><td className={styles.value}>{benchmarkReliability?.reading ?? "~30% estimated broken"}</td><td>Benchmark-quality caveat</td><td><a href={benchmarkReliability?.source} target="_blank" rel="noreferrer">Analysis ↗</a></td></tr>
-            </tbody>
-          </table>
+        <div className={styles.evidenceList}>
+          {aiEvidence.map((item) => <article className={styles[item.tone]} key={item.label}>
+            <div><span>{item.label}</span><strong>{item.value}</strong></div>
+            <p>{item.scope}</p>
+            <a href={item.href} target="_blank" rel="noreferrer">{item.source} ↗</a>
+          </article>)}
         </div>
         <details className={styles.details}>
           <summary>Model benchmark detail</summary>
@@ -178,11 +179,13 @@ export default async function AiDashboardPage() {
           <div><span>04</span><h2>Technical paths</h2></div>
           <p>Current demand evidence and NYC role examples—not a ranking.</p>
         </header>
-        <div className={styles.tableWrap}>
-          <table className={styles.dataTable}>
-            <thead><tr><th>Area</th><th>Available market evidence</th><th>Résumé fit</th></tr></thead>
-            <tbody>{d.pivotRadar.map((row) => <tr key={row.area}><td>{row.area}</td><td>{row.evidence}</td><td className={styles.value}>{row.fit}</td></tr>)}</tbody>
-          </table>
+        <div className={styles.pathCards}>
+          {d.pivotRadar.map((row, index) => <article key={row.area}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{row.area}</h3>
+            <p>{row.evidence}</p>
+            <strong>{row.fit}</strong>
+          </article>)}
         </div>
         <details className={styles.details}>
           <summary>TrueUp technology-category data</summary>

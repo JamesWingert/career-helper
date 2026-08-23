@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/", label: "Career paths" },
-  { href: "/ai-dashboard", label: "SWE market" },
-  { href: "/controls-scada", label: "Controls / SCADA" },
+  { href: "/", label: "Career paths", tone: "career" },
+  { href: "/ai-dashboard", label: "SWE market", tone: "market" },
+  { href: "/controls-scada", label: "Controls / SCADA", tone: "controls" },
 ];
 
 export default function SiteHeader() {
@@ -38,15 +38,19 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link className="site-name" href="/">Jimmy&apos;s career plan</Link>
+        <Link className="site-name" href="/">
+          <span className="site-mark" aria-hidden="true">JW</span>
+          <span>Career gameplan</span>
+        </Link>
         <nav aria-label="Primary navigation">
           {links.map((link) => {
             const active = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
-            return <Link className={active ? "current" : ""} href={link.href} key={link.href}>{link.label}</Link>;
+            return <Link aria-current={active ? "page" : undefined} className={active ? "current" : ""} data-tone={link.tone} href={link.href} key={link.href}>{link.label}</Link>;
           })}
         </nav>
         <button className="theme-button" onClick={toggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}>
-          {theme === "dark" ? "Light" : theme === "light" ? "Dark" : "Theme"}
+          <span aria-hidden="true">{theme === "dark" ? "☀" : "◐"}</span>
+          <span>{theme === "dark" ? "Light" : theme === "light" ? "Dark" : "Theme"}</span>
         </button>
       </div>
     </header>

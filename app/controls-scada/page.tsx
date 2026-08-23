@@ -305,8 +305,14 @@ export default function ControlsScadaPage() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <h1>Controls, SCADA, and OT</h1>
-        <p>Build PLC, SCADA, instrumentation, and commissioning depth for several viable routes—not one employer-dependent bet.</p>
+        <div>
+          <span className={styles.eyebrow}>Controls career plan</span>
+          <h1>Controls, SCADA, and OT</h1>
+          <p>Build PLC, SCADA, instrumentation, and commissioning depth for several viable routes—not one employer-dependent bet.</p>
+        </div>
+        <aside className={styles.heroPath} aria-label="Core controls path">
+          <span>PLC logic</span><i aria-hidden="true">→</i><span>SCADA</span><i aria-hidden="true">→</i><span>Field proof</span>
+        </aside>
       </section>
 
       <nav className={styles.nav} aria-label="Controls career plan sections">
@@ -321,7 +327,7 @@ export default function ControlsScadaPage() {
 
       <section className={styles.status}>
         <div>
-          <h2>Software connected to physical systems.</h2>
+          <h2>What the work actually is</h2>
           <p>Engineers connect PLC logic, instruments, networks, SCADA, alarms, and historians—then commission and troubleshoot the full chain.</p>
         </div>
         <div className={styles.progress}>
@@ -350,13 +356,13 @@ export default function ControlsScadaPage() {
 
       <section id="routes" className={styles.routeStrategy}>
         <header>
-          <span className={styles.eyebrow}>RESILIENT ROUTE STRATEGY</span>
-          <h2>Build one controls core. Keep three ways into the field open.</h2>
+          <span className={styles.eyebrow}>Three ways in</span>
+          <h2>Same career. Different entry routes.</h2>
           <p>These are employment routes into the same controls/automation career—not three unrelated careers. Amazon is useful leverage, but it cannot be the plan’s single point of failure.</p>
         </header>
         <div className={styles.routeGrid}>
           <article>
-            <span>LANE 1 · INTERNAL UPSIDE</span>
+            <span>Internal upside</span>
             <h3>Amazon SWE → AWS controls</h3>
             <p>Stay employed while learning. Search internal Data Center Controls, Critical Facilities Controls, BMS/EPMS, Controls Design, and infrastructure-automation roles.</p>
             <ul>
@@ -368,13 +374,13 @@ export default function ControlsScadaPage() {
             <b>Advantage:</b><p>Amazon context, internal network, and proven delivery reduce transition risk. They do not replace controls or commissioning experience.</p>
           </article>
           <article>
-            <span>LANE 2 · ALIGNED EXTERNAL BRIDGE</span>
+            <span>Most aligned external bridge</span>
             <h3>BAS/BMS and HVAC controls</h3>
             <p>Target building-automation integrators, OEM branches, and mission-critical facilities. BACnet, HVAC sequences, BMS, startup, and commissioning transfer directly toward data-center power/cooling controls.</p>
             <b>Best when:</b><p>You need experience before a hyperscaler will take the bet, or Amazon employment ends unexpectedly.</p>
           </article>
           <article>
-            <span>LANE 3 · BROADEST EXTERNAL BRIDGE</span>
+            <span>Broadest external bridge</span>
             <h3>Industrial / water controls</h3>
             <p>Target systems integrators and field-service teams for PLC, SCADA, instrumentation, drawings, and repeated commissioning. This is the broadest way to become employable across industrial OT.</p>
             <b>Tradeoff:</b><p>Often more travel and a larger initial pay cut, but stronger hands-on breadth than a narrow in-house role.</p>
@@ -385,19 +391,20 @@ export default function ControlsScadaPage() {
 
       <section id="comparison" className={styles.comparison}>
         <header>
-          <span className={styles.eyebrow}>PERSONALIZED OPTION COMPARISON</span>
-          <h2>Ceiling is not the same as likelihood.</h2>
-          <p>Qualitative ratings based on your SWE/Amazon position, the controls experience gap, current postings, and hiring breadth—not measured probabilities.</p>
+          <span className={styles.eyebrow}>Compare the options</span>
+          <h2>Compare the routes</h2>
+          <p>These are directional judgments based on your SWE/Amazon position, the controls experience gap, current postings, and hiring breadth.</p>
         </header>
-        <div className={styles.decisionTable} role="table" aria-label="Controls career option comparison">
-          <div className={styles.decisionHead} role="row"><span>Option</span><span>Pay ceiling</span><span>Chance to reach it</span><span>Hiring outlook</span><span>Your SWE fit</span></div>
-          {optionComparison.map((item) => <div role="row" key={item.option}>
-            <strong><small>{item.stage}</small>{item.option}</strong>
-            <span data-label="Pay ceiling">{item.ceiling}</span>
-            <span data-label="Chance to reach it">{item.reach}</span>
-            <span data-label="Hiring outlook">{item.outlook}</span>
-            <span data-label="Your SWE fit">{item.fit}</span>
-          </div>)}
+        <div className={styles.decisionCards}>
+          {optionComparison.map((item) => <article key={item.option}>
+            <header><span>{item.stage}</span><h3>{item.option}</h3></header>
+            <dl>
+              <div><dt>Pay ceiling</dt><dd>{item.ceiling}</dd></div>
+              <div><dt>Chance to reach it</dt><dd>{item.reach}</dd></div>
+              <div><dt>Hiring outlook</dt><dd>{item.outlook}</dd></div>
+              <div><dt>Fit from SWE</dt><dd>{item.fit}</dd></div>
+            </dl>
+          </article>)}
         </div>
         <div className={styles.comparisonSummary}>
           <p><b>Best probability-weighted entry:</b> BAS/BMS, with industrial integrators close behind.</p>
@@ -414,8 +421,8 @@ export default function ControlsScadaPage() {
 
       <section id="top-tier" className={styles.topTier}>
         <div>
-          <span className={styles.eyebrow}>CAREER CEILING</span>
-          <h2>Data-center controls and SCADA software.</h2>
+          <span className={styles.eyebrow}>Highest-pay destinations</span>
+          <h2>Data-center controls and SCADA software</h2>
           <p>The strongest pay and technical scope sit around power, cooling, BMS, EPMS, PLC, SCADA, and commissioning for hyperscale data centers.</p>
         </div>
         <dl>
@@ -429,8 +436,8 @@ export default function ControlsScadaPage() {
 
       <section id="plan" className={styles.section}>
         <header>
-          <span className={styles.eyebrow}>10 MODULES · 6–12 MONTHS · 6–8 HOURS/WEEK</span>
-          <h2>Core controls first; route modules last.</h2>
+          <span className={styles.eyebrow}>10 modules · 6–12 months · 6–8 hours/week</span>
+          <h2>Learn the shared core first.</h2>
           <p>Start internal conversations now. Apply broadly when the core modules and capstone are explainable; do not wait to finish both route modules.</p>
         </header>
         <div className={styles.stageList}>
@@ -577,12 +584,12 @@ export default function ControlsScadaPage() {
           ))}
         </div>
 
-        <div className={styles.compTable} role="table" aria-label="Approximate compensation progression">
-          <div className={styles.compHead} role="row"><span>Stage</span><span>Normal base</span><span>Upside—not base</span></div>
-          <div role="row"><strong>First controls / SCADA / BAS role</strong><span>$70k–$115k</span><p>Paid overtime and heavy travel can lift cash, but they also change the quality-of-life tradeoff.</p></div>
-          <div role="row"><strong>2–5 years; independent commissioning</strong><span>$105k–$150k</span><p>Travel, shutdown work, or straight-time/1.5× overtime can push cash higher.</p></div>
-          <div role="row"><strong>5–8 years; senior / architect / OT lead</strong><span>$135k–$185k</span><p>Bonuses, overtime, or scarce platform/domain expertise can approach or exceed $200k.</p></div>
-          <div role="row"><strong>Selective destination examples</strong><span>$111k–$264k</span><p>Current AWS controls and Fluidstack SCADA-software listings span this range; they are different roles, levels, and markets.</p></div>
+        <div className={styles.compTable}>
+          <div className={styles.compHead}><span>Stage</span><span>Normal base</span><span>Upside—not base</span></div>
+          <div><strong>First controls / SCADA / BAS role</strong><span>$70k–$115k</span><p>Paid overtime and heavy travel can lift cash, but they also change the quality-of-life tradeoff.</p></div>
+          <div><strong>2–5 years; independent commissioning</strong><span>$105k–$150k</span><p>Travel, shutdown work, or straight-time/1.5× overtime can push cash higher.</p></div>
+          <div><strong>5–8 years; senior / architect / OT lead</strong><span>$135k–$185k</span><p>Bonuses, overtime, or scarce platform/domain expertise can approach or exceed $200k.</p></div>
+          <div><strong>Selective destination examples</strong><span>$111k–$264k</span><p>Current AWS controls and Fluidstack SCADA-software listings span this range; they are different roles, levels, and markets.</p></div>
         </div>
         <p className={styles.salaryNote}>Planning ranges for NYC/NJ and higher-paying US markets, not guarantees. Internal mobility may preserve more total compensation than an external bridge, but verify level and package. Per diem is reimbursement, and bill rate is not take-home pay.</p>
 
