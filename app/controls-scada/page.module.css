@@ -17,21 +17,16 @@
   letter-spacing: .08em;
   text-transform: uppercase;
 }
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 54px; align-items: end; padding: 62px 0 38px; }
+.hero { padding: 62px 0 38px; }
 .hero h1 { max-width: 780px; margin: 9px 0 13px; font: 600 clamp(44px, 6.2vw, 73px)/.96 Newsreader, serif; letter-spacing: -.045em; }
 .hero > div > p { max-width: 760px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
-.heroGoal { position: relative; display: grid; gap: 8px; padding: 19px 20px 19px 24px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--page-accent) 35%, var(--border)); border-radius: 14px; background: var(--page-accent-soft); }
-.heroGoal::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--page-accent); }
-.heroGoal > span { margin-bottom: 2px; color: var(--page-accent-dark); font: 500 8px DM Mono, monospace; letter-spacing: .08em; text-transform: uppercase; }
-.heroGoal strong { display: flex; align-items: center; gap: 8px; font-size: 12px; }
-.heroGoal strong::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--page-accent); }
 
 .nav { position: sticky; top: 68px; z-index: 6; display: flex; gap: 5px; overflow-x: auto; padding: 8px; border: 1px solid var(--border); border-radius: 13px; background: var(--nav-bg); box-shadow: 0 8px 24px color-mix(in srgb, var(--text) 5%, transparent); backdrop-filter: blur(14px); scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
 .nav a { padding: 8px 11px; border-radius: 8px; color: var(--muted); font-size: 10.5px; font-weight: 700; text-decoration: none; white-space: nowrap; }
 .nav a:hover { color: var(--text); background: var(--page-accent-soft); }
 
-.status { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 44px; margin-top: 18px; padding: 34px; border-radius: 18px 18px 0 0; background: var(--controls-panel); color: var(--controls-panel-text); scroll-margin-top: 132px; }
+.status { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 44px; margin-top: 18px; padding: 34px; border-radius: 18px; background: var(--controls-panel); color: var(--controls-panel-text); scroll-margin-top: 132px; }
 .statusLabel { color: #f2a28d; }
 .status h2, .section h2, .pathSection h2, .ready h2 { margin: 7px 0 9px; font: 600 clamp(29px, 3.6vw, 42px)/1.04 Newsreader, serif; letter-spacing: -.03em; }
 .status h2 { max-width: 780px; }
@@ -43,13 +38,6 @@
 .progress > div { height: 7px; margin: 10px 0 8px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.14); }
 .progress > div i { display: block; height: 100%; border-radius: 99px; background: #f0a18c; transition: width .2s ease; }
 .progress > small { color: rgba(248,245,237,.58); font-size: 8.5px; }
-
-.goalGrid { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: 68px; overflow: hidden; border: 1px solid var(--border); border-top: 0; border-radius: 0 0 18px 18px; background: var(--surface); }
-.goalGrid article { padding: 23px 25px 25px; }
-.goalGrid article + article { border-left: 1px solid var(--border); }
-.goalGrid span { color: var(--page-accent-dark); font: 500 8px DM Mono, monospace; letter-spacing: .06em; text-transform: uppercase; }
-.goalGrid h3 { margin: 9px 0 7px; font-size: 15px; }
-.goalGrid p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
 
 .section, .pathSection, .ready { margin: 72px 0; scroll-margin-top: 132px; }
 .section > header, .pathSection > header, .ready > header { max-width: 850px; margin-bottom: 24px; }
@@ -63,8 +51,10 @@
 .pathRail span { color: var(--page-accent-dark); font: 500 8px DM Mono, monospace; letter-spacing: .05em; text-transform: uppercase; }
 .pathRail h3 { margin: 8px 0; font-size: 17px; }
 .pathRail p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.57; }
-.pathSection > aside { margin-top: 12px; padding: 15px 17px; border-radius: 11px; background: var(--gold-soft); color: var(--muted); font-size: 10.5px; line-height: 1.55; }
-.pathSection > aside strong { color: var(--text); }
+.pathNotes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.pathNotes aside { padding: 15px 17px; border-radius: 11px; background: var(--gold-soft); color: var(--muted); font-size: 10.5px; line-height: 1.55; }
+.pathNotes aside:first-child { background: var(--surface-subtle); box-shadow: inset 0 0 0 1px var(--border); }
+.pathNotes strong { color: var(--text); }
 
 .roleLadder { display: grid; gap: 10px; }
 .roleCard { display: grid; grid-template-columns: 112px minmax(0, 1fr) 250px; gap: 22px; align-items: center; padding: 20px 22px 20px 18px; border: 1px solid var(--border); border-left: 5px solid var(--border-strong); border-radius: 14px; background: var(--surface); }
@@ -155,13 +145,13 @@
 .completeToggle input:checked + i, .ready input:checked + i { background: var(--page-accent); box-shadow: inset 0 0 0 3px var(--surface); }
 .completeToggle input:focus-visible + i, .ready input:focus-visible + i { outline: 3px solid color-mix(in srgb, var(--page-accent) 45%, transparent); outline-offset: 3px; }
 
-.softwareGrid, .projectGrid, .marketProof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.softwareGrid a, .projectGrid article, .marketProof a { display: block; padding: 19px; border: 1px solid var(--border); border-radius: 13px; background: var(--surface); color: var(--text); text-decoration: none; }
-.softwareGrid a:hover, .marketProof a:hover { border-color: var(--page-accent); }
-.softwareGrid a > span, .projectGrid article > span, .marketProof a > span { color: var(--page-accent-dark); font: 500 8px DM Mono, monospace; letter-spacing: .04em; text-transform: uppercase; }
-.softwareGrid h3, .projectGrid h3, .marketProof h3 { margin: 9px 0 7px; font-size: 14px; }
-.softwareGrid p, .projectGrid p, .marketProof p { margin: 0 0 8px; color: var(--muted); font-size: 9.5px; line-height: 1.5; }
-.softwareGrid b, .marketProof b { color: var(--text); font-size: 8.5px; }
+.softwareGrid, .projectGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.softwareGrid a, .projectGrid article { display: block; padding: 19px; border: 1px solid var(--border); border-radius: 13px; background: var(--surface); color: var(--text); text-decoration: none; }
+.softwareGrid a:hover { border-color: var(--page-accent); }
+.softwareGrid a > span, .projectGrid article > span { color: var(--page-accent-dark); font: 500 8px DM Mono, monospace; letter-spacing: .04em; text-transform: uppercase; }
+.softwareGrid h3, .projectGrid h3 { margin: 9px 0 7px; font-size: 14px; }
+.softwareGrid p, .projectGrid p { margin: 0 0 8px; color: var(--muted); font-size: 9.5px; line-height: 1.5; }
+.softwareGrid b { color: var(--text); font-size: 8.5px; }
 .hardware { display: grid; grid-template-columns: 1.35fr .65fr; gap: 10px; margin-top: 10px; }
 .hardware article, .hardware aside { padding: 22px; border-radius: 13px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
 .hardware aside { background: var(--gold-soft); }
@@ -180,10 +170,34 @@
 .compTable p { margin: 0; color: var(--muted); font-size: 9.5px; line-height: 1.45; }
 .compTable .compHead { background: var(--surface-subtle); }
 .compHead span { color: var(--text); font: 500 8px DM Mono, monospace; text-transform: uppercase; }
-.salaryNote, .checked, .outlookNote { color: var(--muted); font-size: 9px; line-height: 1.5; }
-.checked { text-align: right; }
+.salaryNote, .outlookNote { color: var(--muted); font-size: 9px; line-height: 1.5; }
 .outlookNote { max-width: 900px; margin-top: 18px; }
-.marketProof { grid-template-columns: 1fr 1fr; margin-top: 17px; }
+.jobBoardHeader { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 15px; border: 1px solid var(--border); border-bottom: 0; border-radius: 13px 13px 0 0; background: var(--surface-subtle); }
+.jobBoardHeader strong { color: var(--page-accent-dark); font: 500 8px DM Mono, monospace; letter-spacing: .05em; text-transform: uppercase; }
+.jobBoardHeader span { color: var(--muted); font-size: 9px; }
+.jobBoard { margin: 0; padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 0 0 13px 13px; background: var(--surface); list-style: none; }
+.jobBoard li + li { border-top: 1px solid var(--border); }
+.jobBoard a { display: grid; grid-template-columns: 34px minmax(230px, 1fr) minmax(280px, .85fr) 18px; gap: 17px; align-items: center; padding: 17px 16px; color: var(--text); text-decoration: none; transition: background-color .15s ease; }
+.jobBoard a:hover { background: var(--page-accent-soft); }
+.jobBoard a:focus-visible { position: relative; z-index: 1; outline: 3px solid color-mix(in srgb, var(--page-accent) 45%, transparent); outline-offset: -3px; }
+.jobNumber { color: var(--faint); font: 500 11px DM Mono, monospace; }
+.jobIdentity > div { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.jobPriority { padding: 4px 6px; border-radius: 999px; background: var(--surface-subtle); color: var(--muted); font: 500 7px DM Mono, monospace; letter-spacing: .04em; text-transform: uppercase; }
+.jobPriority[data-priority="Priority"] { background: var(--page-accent-soft); color: var(--page-accent-dark); }
+.jobPriority[data-priority="Stretch"] { background: var(--teal-soft); color: var(--teal); }
+.jobPriority[data-priority="Bridge"] { background: var(--gold-soft); color: var(--text); }
+.jobCompany { color: var(--muted); font-size: 9px; font-weight: 800; }
+.jobIdentity h3 { margin: 5px 0 4px; font-size: 13px; }
+.jobIdentity p { margin: 0; color: var(--muted); font-size: 9.5px; line-height: 1.45; }
+.jobFacts { display: grid; gap: 6px; margin: 0; }
+.jobFacts > div { display: grid; grid-template-columns: 84px 1fr; gap: 8px; }
+.jobFacts dt { color: var(--faint); font: 500 7.5px DM Mono, monospace; text-transform: uppercase; }
+.jobFacts dd { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.4; }
+.jobArrow { color: var(--page-accent-dark); font-size: 15px; }
+.jobsEmpty { margin: 0; padding: 22px; border: 1px solid var(--border); border-radius: 0 0 13px 13px; background: var(--surface); color: var(--muted); font-size: 10px; }
+.payContext { margin-top: 34px; }
+.payContext > header { margin-bottom: 13px; }
+.payContext h3 { margin: 6px 0 0; font: 600 24px/1.1 Newsreader, serif; letter-spacing: -.02em; }
 .inlineLinks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .inlineLinks a { padding: 7px 9px; border-radius: 7px; background: var(--surface-subtle); color: var(--text); font-size: 8.5px; font-weight: 800; text-decoration: none; }
 .inlineLinks a:hover { background: var(--page-accent-soft); color: var(--page-accent-dark); }
@@ -211,27 +225,26 @@
 .footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 9px; line-height: 1.5; }
 
 @media (max-width: 960px) {
-  .goalGrid, .titleGrid, .softwareGrid, .projectGrid { grid-template-columns: 1fr 1fr; }
-  .goalGrid article:last-child, .titleGrid article:first-child, .projectGrid article:first-child { grid-column: 1 / -1; }
-  .goalGrid article:last-child { border-top: 1px solid var(--border); border-left: 0; }
+  .titleGrid, .softwareGrid, .projectGrid { grid-template-columns: 1fr 1fr; }
+  .titleGrid article:first-child, .projectGrid article:first-child { grid-column: 1 / -1; }
   .roleCard { grid-template-columns: 96px minmax(0, 1fr); }
   .scoreGrid { grid-column: 2; grid-template-columns: repeat(3, 1fr); }
   .moduleResources > div { grid-template-columns: 1fr 1fr; }
   .hardware { grid-template-columns: 1fr; }
+  .jobBoard a { grid-template-columns: 34px minmax(0, 1fr) 18px; }
+  .jobFacts { grid-column: 2; }
+  .jobArrow { grid-column: 3; grid-row: 1 / span 2; }
 }
 
 @media (max-width: 720px) {
   .page { padding: 0 max(16px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
-  .hero { grid-template-columns: 1fr; gap: 22px; padding: 40px 0 27px; }
+  .hero { padding: 40px 0 27px; }
   .hero h1 { font-size: 47px; }
   .hero > div > p { font-size: 13px; }
-  .heroGoal { max-width: 360px; }
   .nav { top: 62px; margin-inline: -4px; }
   .status { grid-template-columns: 1fr; gap: 22px; padding: 26px 22px; }
   .progress { max-width: 250px; }
-  .goalGrid, .pathRail, .titleGrid, .softwareGrid, .projectGrid, .marketProof, .exitGrid, .twoColumn, .ready > div { grid-template-columns: 1fr; }
-  .goalGrid article, .goalGrid article:last-child { grid-column: auto; border-top: 1px solid var(--border); border-left: 0; }
-  .goalGrid article:first-child { border-top: 0; }
+  .pathRail, .pathNotes, .titleGrid, .softwareGrid, .projectGrid, .exitGrid, .twoColumn, .ready > div { grid-template-columns: 1fr; }
   .section, .pathSection, .ready, .twoColumn { margin: 58px 0; scroll-margin-top: 120px; }
   .pathRail::before { top: 24px; bottom: 24px; left: 28px; right: auto; width: 2px; height: auto; }
   .pathRail article { min-height: auto; padding-left: 48px; }
@@ -250,9 +263,13 @@
   .moduleResources, .completeToggle { grid-column: auto; }
   .moduleResources > div { grid-template-columns: 1fr; }
   .projectGrid article:first-child { grid-column: auto; }
+  .jobBoardHeader { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .jobBoard a { grid-template-columns: 30px minmax(0, 1fr) 15px; gap: 11px; align-items: start; padding: 16px 13px; }
+  .jobFacts { grid-column: 2 / -1; }
+  .jobFacts > div { grid-template-columns: 78px 1fr; }
+  .jobArrow { grid-column: 3; grid-row: 1; }
   .compTable > div { grid-template-columns: 1fr; gap: 5px; }
   .compTable .compHead { display: none; }
-  .checked { text-align: left; }
 }
 
 @media (prefers-reduced-motion: reduce) { .progress > div i { transition: none; } }

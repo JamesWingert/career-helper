@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
+import { JOBS_CHECKED_ON, liveJobs } from "./jobs";
 
 type Resource = {
   title: string;
@@ -425,16 +426,10 @@ export default function ControlsScadaPage() {
     <main className={styles.page}>
       <section className={styles.hero}>
         <div>
-          <span className={styles.eyebrow}>Controls career plan</span>
+          <span className={styles.eyebrow}>Controls / SCADA career plan</span>
           <h1>Controls, SCADA, and OT</h1>
-          <p>A practical move from software into physical infrastructure—ranked for compensation, AI resistance, and a credible transition from Amazon SWE.</p>
+          <p>A path from Amazon SWE into industrial automation and data-center infrastructure.</p>
         </div>
-        <aside className={styles.heroGoal} aria-label="Career decision criteria">
-          <span>Optimize for all three</span>
-          <strong>High pay</strong>
-          <strong>AI-resistant work</strong>
-          <strong>Realistic SWE transfer</strong>
-        </aside>
       </section>
 
       <nav className={styles.nav} aria-label="Controls career plan sections">
@@ -443,7 +438,7 @@ export default function ControlsScadaPage() {
         <a href="#companies">Companies</a>
         <a href="#plan">Learn</a>
         <a href="#build">Build</a>
-        <a href="#pay">Pay evidence</a>
+        <a href="#openings">Open jobs</a>
         <a href="#ready">Apply</a>
       </nav>
 
@@ -461,29 +456,11 @@ export default function ControlsScadaPage() {
         </div>
       </section>
 
-      <section className={styles.goalGrid} aria-label="Why this route fits the goal">
-        <article>
-          <span>01 · Compensation</span>
-          <h3>Protect the upside</h3>
-          <p>Software-forward SCADA and owner-side data-center controls can retain tech-like compensation. Generic service work usually cannot.</p>
-        </article>
-        <article>
-          <span>02 · Durability</span>
-          <h3>Tie software to the real world</h3>
-          <p>Live equipment, safety, commissioning, troubleshooting, and operational accountability are much harder to automate than ordinary software implementation.</p>
-        </article>
-        <article>
-          <span>03 · Transition</span>
-          <h3>Use what already transfers</h3>
-          <p>Python, SQL, TCP/IP, observability, versioning, distributed debugging, and data pipelines create a credible entry story—once the field gap is visible and addressed.</p>
-        </article>
-      </section>
-
       <section className={styles.pathSection}>
         <header>
-          <span className={styles.eyebrow}>One progression</span>
-          <h2>The path is clearer than the titles make it look.</h2>
-          <p>This is still Controls/SCADA. The middle job may vary because the industry does not use one standardized title.</p>
+          <span className={styles.eyebrow}>Career path</span>
+          <h2>One controls career, several job titles.</h2>
+          <p>The titles change by employer and system. The work still builds toward the same PLC, SCADA, networking, and commissioning skill set.</p>
         </header>
         <div className={styles.pathRail}>
           <article>
@@ -502,12 +479,15 @@ export default function ControlsScadaPage() {
             <p>Own BMS, EPMS, power, cooling, SCADA, alarms, commissioning, and reliability at a hyperscaler or major data-center operator.</p>
           </article>
         </div>
-        <aside><strong>Amazon helps, but it is not the strategy.</strong> Internal familiarity, tenure, and networking may improve access to AWS infrastructure roles. They do not replace PLC/BMS/SCADA or commissioning experience, and the plan remains portable outside Amazon.</aside>
+        <div className={styles.pathNotes}>
+          <aside><strong>Your CS degree is usable, but it narrows the search.</strong> Prioritize postings that accept computer science, computer engineering, a related technical field, or equivalent experience. Skip roles centered on electrical design, stamped drawings, PE licensure, or a hard EE-only requirement unless the employer confirms flexibility.</aside>
+          <aside><strong>Amazon is one route, not the plan.</strong> Internal familiarity, tenure, and networking may improve access to AWS infrastructure roles. They do not replace PLC/BMS/SCADA or commissioning experience, so keep building an external path too.</aside>
+        </div>
       </section>
 
       <section id="jobs" className={styles.section}>
         <header>
-          <span className={styles.eyebrow}>Ranked for your actual goal</span>
+          <span className={styles.eyebrow}>Role ranking</span>
           <h2>Good jobs, bridges, and fallbacks.</h2>
           <p>Scores are directional, not universal salary data. “Transition chance” means your fit after a focused controls portfolio—not the chance of getting any job immediately.</p>
         </header>
@@ -553,9 +533,9 @@ export default function ControlsScadaPage() {
 
       <section id="companies" className={styles.section}>
         <header>
-          <span className={styles.eyebrow}>Company target list</span>
-          <h2>Start high. Judge the role, not just the logo.</h2>
-          <p>The list is intentionally extensive but collapsed by default. Open the tier relevant to the search instead of scanning one enormous company wall.</p>
+          <span className={styles.eyebrow}>Company tiers</span>
+          <h2>Where to search.</h2>
+          <p>Open a tier to see employers. Rank the actual duties above the company name.</p>
         </header>
         <div className={styles.companyTiers}>
           {companyTiers.map((tier, index) => (
@@ -578,8 +558,8 @@ export default function ControlsScadaPage() {
       <section id="plan" className={styles.section}>
         <header>
           <span className={styles.eyebrow}>10 modules · 6–12 months · 6–8 hours/week</span>
-          <h2>A complete curriculum without ten open textbooks.</h2>
-          <p>Each module stays compact until opened. Every module includes concrete resources and a proof artifact—not just a topic list.</p>
+          <h2>10-module learning plan.</h2>
+          <p>Open a module for the topics, proof artifact, and 1–3 learning resources.</p>
         </header>
         <div className={styles.stageList}>
           {modules.map((module, index) => <LearningModule module={module} number={index + 1} complete={!!done[module.id]} onToggle={toggleModule} key={module.id} />)}
@@ -588,8 +568,8 @@ export default function ControlsScadaPage() {
 
       <section id="build" className={styles.section}>
         <header>
-          <span className={styles.eyebrow}>Install first · spend later</span>
-          <h2>The smallest useful toolchain.</h2>
+          <span className={styles.eyebrow}>Tools and starter hardware</span>
+          <h2>Set up the software lab first.</h2>
           <p>Use software for 4–6 weeks before buying hardware. Vendor PLC tooling is still Windows-heavy; keep Ignition, PostgreSQL, and Wireshark on your Mac and use a Windows VM or spare PC for CODESYS/CLICK.</p>
         </header>
         <div className={styles.softwareGrid}>
@@ -605,7 +585,7 @@ export default function ControlsScadaPage() {
         <div className={styles.hardware}>
           <article>
             <span className={styles.eyebrow}>RECOMMENDED STARTER · BUDGET ROUGHLY $350–$500</span>
-            <h3>Buy only after the simulated pump works.</h3>
+            <h3>Starter hardware after the software lab</h3>
             <ul>
               <li><b>PLC:</b> AutomationDirect CLICK PLUS C2-01CPU with a mixed discrete/4–20mA option module; recheck current compatibility and price before ordering</li>
               <li><b>Power and wiring:</b> UL-listed 24VDC DIN-rail supply, DIN rail, terminal blocks, fuse holders, 18–22 AWG wire, ferrules</li>
@@ -624,7 +604,7 @@ export default function ControlsScadaPage() {
       <section className={styles.section}>
         <header>
           <span className={styles.eyebrow}>Two required projects · one optional specialization</span>
-          <h2>Build proof a controls team can inspect.</h2>
+          <h2>Portfolio projects.</h2>
         </header>
         <div className={styles.projectGrid}>
           <article>
@@ -660,12 +640,47 @@ export default function ControlsScadaPage() {
         </div>
       </section>
 
-      <section id="pay" className={styles.section}>
+      <section id="openings" className={styles.section}>
         <header>
-          <span className={styles.eyebrow}>Current compensation evidence</span>
-          <h2>The employer and system matter more than the title.</h2>
-          <p>Current examples show why “Controls Engineer” cannot be treated as one compensation band. These are planning references, not promised openings.</p>
+          <span className={styles.eyebrow}>Current openings · checked weekly</span>
+          <h2>{liveJobs.length} open jobs.</h2>
+          <p>Sorted by value for this transition. Priority means strong SWE leverage; Stretch means attractive but experience-gated; Bridge builds field experience; Fallback trades compensation for access.</p>
         </header>
+        <div className={styles.jobBoardHeader}>
+          <strong>{liveJobs.length === 10 ? "10 verified open" : `${liveJobs.length} verified · refresh incomplete`}</strong>
+          <span>Checked {JOBS_CHECKED_ON}</span>
+        </div>
+        {liveJobs.length > 0 ? (
+          <ol className={styles.jobBoard}>
+            {liveJobs.map((job, index) => (
+              <li key={job.url}>
+                <a href={job.url} target="_blank" rel="noreferrer">
+                  <span className={styles.jobNumber}>{String(index + 1).padStart(2, "0")}</span>
+                  <div className={styles.jobIdentity}>
+                    <div><span className={styles.jobPriority} data-priority={job.priority}>{job.priority}</span><span className={styles.jobCompany}>{job.company}</span></div>
+                    <h3>{job.title}</h3>
+                    <p>{job.reason}</p>
+                  </div>
+                  <dl className={styles.jobFacts}>
+                    <div><dt>Location</dt><dd>{job.location}</dd></div>
+                    <div><dt>Listed pay</dt><dd>{job.pay}</dd></div>
+                    <div><dt>Experience asked</dt><dd>{job.experience}</dd></div>
+                    <div><dt>Degree filter</dt><dd>{job.education}</dd></div>
+                  </dl>
+                  <span className={styles.jobArrow} aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className={styles.jobsEmpty}>No openings were verified this week. The previous links were removed instead of leaving stale jobs on the page.</p>
+        )}
+
+        <div className={styles.payContext}>
+          <header>
+            <span className={styles.eyebrow}>Pay context</span>
+            <h3>Typical bands by role type</h3>
+          </header>
         <div className={styles.compTable}>
           <div className={styles.compHead}><span>Role context</span><span>Current examples</span><span>Interpretation</span></div>
           <div><strong>Software-forward / AI infrastructure</strong><span>$164k–$300k+</span><p>Highest ceiling and strongest SWE leverage; few openings and direct OT experience is commonly requested.</p></div>
@@ -673,15 +688,8 @@ export default function ControlsScadaPage() {
           <div><strong>High-value industrial controls</strong><span>$110k–$200k</span><p>Advanced manufacturing, energy, and regulated industries can pay well once controls experience is credible.</p></div>
           <div><strong>Traditional BAS / field branch</strong><span>$52k–$119k</span><p>Good physical-systems experience, but often a major pay cut relative to Amazon SWE.</p></div>
         </div>
-        <p className={styles.salaryNote}>Examples combine different locations and experience levels. Base salary, total compensation, overtime, and per diem are not interchangeable.</p>
-
-        <div className={styles.marketProof}>
-          <a href="https://jobs.ashbyhq.com/fluidstack/7528afd0-2aae-4cab-8d47-9c3e5d004813" target="_blank" rel="noreferrer"><span>Software + OT</span><h3>Fluidstack · Software Engineer, SCADA</h3><p>$224k–$264k base plus equity; software built against SCADA, EPMS, OPC UA, historians, and alarms.</p><b>View evidence ↗</b></a>
-          <a href="https://jobs.ashbyhq.com/Lambda/aedcfc9e-c2ad-4e69-8962-1ffe1f455ba1" target="_blank" rel="noreferrer"><span>AI data-center owner</span><h3>Lambda · Facility Telemetry & Controls</h3><p>$185k–$290k base by location; BMS, DCIM, protocols, telemetry pipelines, and commissioning.</p><b>View evidence ↗</b></a>
-          <a href="https://www.google.com/about/careers/applications/jobs/results/119147112913871558-data-center-controls-engineer-global-data-centers" target="_blank" rel="noreferrer"><span>Established hyperscaler</span><h3>Google · Data Center Controls Engineer</h3><p>$144k–$209k base plus bonus and equity; BMS, EPMS, PLC, SCADA, field verification, and commissioning.</p><b>View evidence ↗</b></a>
-          <a href="https://jobs.johnsoncontrols.com/job/WD30277108" target="_blank" rel="noreferrer"><span>Traditional BAS branch</span><h3>Johnson Controls · Controls Systems Technician</h3><p>$25–$34.50/hour; commissioning and HVAC controls experience with much lower compensation.</p><b>View evidence ↗</b></a>
+          <p className={styles.salaryNote}>Employer-listed pay is copied as listed. Base, total cash, OTE, overtime, equity, and location are not directly comparable.</p>
         </div>
-        <p className={styles.checked}>Market examples checked August 23, 2026. Postings can close; use them as skill and compensation evidence, not as promised openings.</p>
         <p className={styles.outlookNote}>Controls engineering has no clean BLS category. Adjacent U.S. occupations remain positive, while data-center power and cooling expansion supports controls demand. That supports the path; it does not guarantee a particular title or hiring rate.</p>
         <div className={styles.inlineLinks}>
           <a href="https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm" target="_blank" rel="noreferrer">BLS projections ↗</a>
@@ -691,8 +699,8 @@ export default function ControlsScadaPage() {
 
       <section className={styles.section}>
         <header>
-          <span className={styles.eyebrow}>Later options—not three decisions you need to make now</span>
-          <h2>One continuation and two optional branches.</h2>
+          <span className={styles.eyebrow}>After 2–5 years</span>
+          <h2>Where this can lead.</h2>
         </header>
         <div className={styles.exitGrid}>
           <details open><summary><span>Continuation</span><strong>Data-center controls</strong></summary><p>Add BACnet/IP, HVAC and chilled-water sequences, electrical one-lines, UPS/generators/switchgear, BMS/EPMS, trend-based fault finding, and commissioning levels. This is the main destination—not a different career.</p></details>
@@ -717,7 +725,7 @@ export default function ControlsScadaPage() {
         </article>
         <article>
           <span className={styles.eyebrow}>Job quality filter</span>
-          <h3>Questions that separate a strong bridge from a dead end.</h3>
+          <h3>Questions to ask before accepting a bridge role</h3>
           <ul>
             <li>What percentage is PLC, SCADA, electrical design, commissioning, support, and panel work?</li>
             <li>How much travel, weekend work, and on-call time occurred on this team last year?</li>
@@ -737,7 +745,7 @@ export default function ControlsScadaPage() {
         <div>{readyItems.map((item) => <label key={item}><input type="checkbox" /><i aria-hidden="true" /><span>{item}</span></label>)}</div>
       </section>
 
-      <footer className={styles.footer}>The core path: SWE → software-forward controls or a high-value integrator → PLC/SCADA + commissioning proof → owner-side data-center controls.</footer>
+      <footer className={styles.footer}>SWE → software-forward controls or a strong integrator → PLC/SCADA and commissioning experience → owner-side data-center controls.</footer>
     </main>
   );
 }
