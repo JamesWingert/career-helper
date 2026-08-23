@@ -1,5 +1,5 @@
 import { loadLatestSnapshot } from "../../lib/market-turso";
-import { dashboardData } from "./data";
+import { dashboardData, longitudinalMethod, sourceArchitecture } from "./data";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +11,7 @@ function signed(value: number) {
 export default async function AiDashboardPage() {
   const d = await loadLatestSnapshot(dashboardData);
   const details = d.marketDetails ?? dashboardData.marketDetails;
+  const revelio = d.revelio ?? dashboardData.revelio;
   const sweIndex = Number(d.metrics[0].value);
   const overallIndex = details.overallPostings.value;
   const relativeGap = ((sweIndex - overallIndex) / overallIndex) * 100;
@@ -37,7 +38,7 @@ export default async function AiDashboardPage() {
         <a href="#experience">Experience</a>
         <a href="#ai-impact">AI impact</a>
         <a href="#paths">Technical paths</a>
-        <a href="#sources">Sources</a>
+        <a href="#sources">Sources &amp; method</a>
       </nav>
 
       <section className={styles.readout}>
@@ -71,6 +72,22 @@ export default async function AiDashboardPage() {
             </tbody>
           </table>
         </div>
+        <details className={styles.details}>
+          <summary>Revelio actual-worker baseline · {revelio.occupation}</summary>
+          <div className={styles.tableWrap}>
+            <table className={styles.dataTable}>
+              <thead><tr><th>Measure</th><th>Current</th><th>Month over month</th><th>Year over year</th><th>Availability / scope</th></tr></thead>
+              <tbody>
+                <tr><td>Estimated employment</td><td className={styles.value}>{revelio.employmentThousands.toLocaleString()}k</td><td>{revelio.employmentChangeMomThousands.toFixed(1)}k</td><td>{revelio.employmentChangeYoyThousands.toFixed(1)}k</td><td>Public monthly series · {revelio.asOf}</td></tr>
+                <tr><td>Active job openings</td><td className={styles.value}>{revelio.jobOpenings.toLocaleString()}</td><td>{signed(revelio.jobOpeningsMomPct)}</td><td>{signed(revelio.jobOpeningsYoyPct)}</td><td>Public monthly series · {revelio.asOf}</td></tr>
+                <tr><td>Hiring rate</td><td className={styles.value}>{revelio.hiringRatePct.toFixed(1)}%</td><td>{revelio.hiringChangeMomPp > 0 ? "+" : ""}{revelio.hiringChangeMomPp.toFixed(1)} pp</td><td>{revelio.hiringChangeYoyPp.toFixed(1)} pp</td><td>Annualized worker-flow rate · {revelio.asOf}</td></tr>
+                <tr><td>Attrition rate</td><td className={styles.value}>{revelio.attritionRatePct.toFixed(1)}%</td><td>{revelio.attritionChangeMomPp.toFixed(1)} pp</td><td>{revelio.attritionChangeYoyPp.toFixed(1)} pp</td><td>Annualized worker-flow rate · {revelio.asOf}</td></tr>
+                <tr><td>Salary in new postings</td><td className={styles.value}>${revelio.newPostingSalary.toLocaleString()}</td><td>{signed(revelio.salaryChangeMomPct)}</td><td>{signed(revelio.salaryChangeYoyPct)}</td><td>Posted-salary measure · {revelio.asOf}</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className={styles.detailNote}>{revelio.note} <a href={revelio.source} target="_blank" rel="noreferrer">Revelio release and downloads ↗</a></p>
+        </details>
       </section>
 
       <section className={styles.section} id="experience">
@@ -112,6 +129,18 @@ export default async function AiDashboardPage() {
             </tbody>
           </table>
         </div>
+        <details className={styles.details}>
+          <summary>Granular YOE, skills, salary, and posting-persistence layer</summary>
+          <div className={styles.tableWrap}>
+            <table className={styles.dataTable}>
+              <thead><tr><th>Source</th><th>Priority</th><th>Availability</th><th>Planned use</th><th>Confidence</th></tr></thead>
+              <tbody>
+                <tr><td><a href="https://docs.lightcast.io/data/docs/job-posting-analytics-jpa-methodology" target="_blank" rel="noreferrer">Lightcast ↗</a></td><td className={styles.value}>High-priority optional</td><td>Public/free-access data only unless credentials become available</td><td>Deduplicated YOE bands, 5-YOE accessibility, skills, salary, employer breadth, freshness, and persistence</td><td>No dashboard microdata loaded; no values inferred</td></tr>
+                <tr><td>Repeated description sample</td><td className={styles.value}>Core fallback</td><td>Public postings where descriptions can be inspected consistently</td><td>Literal minimum YOE and title classification, kept separate from LinkedIn seniority labels</td><td>Medium; report sample size and missingness</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
       </section>
 
       <section className={styles.section} id="ai-impact">
@@ -125,6 +154,7 @@ export default async function AiDashboardPage() {
             <tbody>
               <tr><td>Early-career SWE employment</td><td className={styles.value}>{earlyCareer?.reading ?? "Nearly -20% vs. 2024"}</td><td>Ages 22–25; strongest negative labor signal</td><td><a href={earlyCareer?.source} target="_blank" rel="noreferrer">Stanford ↗</a></td></tr>
               <tr><td>Experienced-worker employment</td><td className={styles.value}>{experienced?.reading ?? "No comparable decline"}</td><td>Expansion remains visible in older groups</td><td><a href={experienced?.source} target="_blank" rel="noreferrer">Stanford ↗</a></td></tr>
+              <tr><td>Experienced-SWE company substitution</td><td className={styles.value}>No qualifying observation stored</td><td>Requires experienced headcount or backfill reduction, stable/rising output, and explicit AI attribution</td><td><a href="https://www.sec.gov/edgar/search/" target="_blank" rel="noreferrer">SEC / company disclosures ↗</a></td></tr>
               <tr><td>AI-agent deployment in business functions</td><td className={styles.value}>{businessAgents?.reading ?? "Single digits"}</td><td>Adoption remains early</td><td><a href={businessAgents?.source} target="_blank" rel="noreferrer">Stanford AI Index ↗</a></td></tr>
               <tr><td>Frontier autonomous task horizon</td><td className={styles.value}>{d.metrics[5].value}</td><td>50% success horizon; not a workday-equivalent claim</td><td><a href={d.sources[6][2]} target="_blank" rel="noreferrer">METR ↗</a></td></tr>
               <tr><td>Top DeepSWE score</td><td className={styles.value}>{d.benchmarks[0].score}%</td><td>{d.benchmarks[0].model} · {d.benchmarks[0].note}</td><td><a href={d.sources[7][2]} target="_blank" rel="noreferrer">DeepSWE ↗</a></td></tr>
@@ -176,9 +206,25 @@ export default async function AiDashboardPage() {
 
       <section className={styles.section} id="sources">
         <header className={styles.sectionHead}>
-          <div><span>05</span><h2>Sources</h2></div>
-          <p>Direct links used by the recurring research pass.</p>
+          <div><span>05</span><h2>Sources &amp; methodology</h2></div>
+          <p>Availability and confidence are explicit; unavailable data never becomes an invented value.</p>
         </header>
+        <div className={styles.tableWrap}>
+          <table className={styles.dataTable}>
+            <thead><tr><th>Source / role</th><th>Availability</th><th>Confidence</th><th>What it adds</th><th>Guardrail</th></tr></thead>
+            <tbody>
+              {sourceArchitecture.map((source) => <tr key={source.source}><td><a href={source.url} target="_blank" rel="noreferrer">{source.source} ↗</a><br />{source.role}</td><td>{source.availability}</td><td>{source.confidence}</td><td>{source.use}</td><td>{source.limit}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <details className={styles.details}>
+          <summary>Longitudinal collection rules</summary>
+          <div className={styles.tableWrap}>
+            <table className={styles.dataTable}>
+              <tbody>{longitudinalMethod.map((rule, index) => <tr key={rule}><td className={styles.value}>{String(index + 1).padStart(2, "0")}</td><td>{rule}</td></tr>)}</tbody>
+            </table>
+          </div>
+        </details>
         <ul className={styles.sources}>
           {d.sources.map(([label, provider, url]) => <li key={url}><a href={url} target="_blank" rel="noreferrer"><strong>{label}</strong><span>{provider} ↗</span></a></li>)}
         </ul>

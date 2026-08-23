@@ -69,6 +69,28 @@ export const dashboardData = {
     source: "https://www.linkedin.com/jobs/search/?geoId=105080838&keywords=software%20engineer&location=New%20York%2C%20United%20States",
     note: "LinkedIn rounds public result counts and search indexing can lag. We track the same query every cycle for directional movement.",
   },
+  revelio: {
+    asOf: "2026-07",
+    releaseDate: "2026-08-06",
+    occupation: "Computer and Mathematical (SOC 15)",
+    employmentThousands: 10021.5,
+    employmentChangeMomThousands: -0.6,
+    employmentChangeYoyThousands: -39.9,
+    jobOpenings: 1686687,
+    jobOpeningsMomPct: 2.3,
+    jobOpeningsYoyPct: 22.8,
+    hiringRatePct: 26.7,
+    hiringChangeMomPp: 0.4,
+    hiringChangeYoyPp: -0.7,
+    attritionRatePct: 26.7,
+    attritionChangeMomPp: -0.7,
+    attritionChangeYoyPp: -1.9,
+    newPostingSalary: 124266,
+    salaryChangeMomPct: -0.1685,
+    salaryChangeYoyPct: 4.4389,
+    source: "https://www.reveliolabs.com/public-labor-statistics",
+    note: "Public monthly occupation-level baseline. SOC 15 is broader than software engineering and is not a YOE-specific series.",
+  },
   marketDetails: {
     overallPostings: { value: 102.09, asOf: "2026-07-24" },
     seniority: {
@@ -224,3 +246,59 @@ export const dashboardData = {
     ["Agent benchmark", "Terminal-Bench 2.1", "https://www.tbench.ai/leaderboard/terminal-bench/2.1"],
   ],
 } as const;
+
+export const sourceArchitecture = [
+  {
+    source: "Lightcast Job Posting Analytics",
+    role: "Optional high-priority granular postings layer",
+    availability: "Conditional — public/free-access data only unless credentials become available",
+    confidence: "Pending access; strong methodology, no dashboard microdata loaded",
+    use: "Deduplicated postings, minimum YOE, skills, salary, employer breadth, freshness, and persistence.",
+    limit: "Do not display Lightcast values from product documentation or public reports as if they were licensed microdata.",
+    url: "https://docs.lightcast.io/data/docs/job-posting-analytics-jpa-methodology",
+  },
+  {
+    source: "Revelio Public Labor Statistics",
+    role: "Actual-worker, hiring, attrition, openings, and salary layer",
+    availability: "Active — July 2026 public occupation baseline stored",
+    confidence: "Medium–high; public monthly series",
+    use: "Independent worker-flow confirmation by occupation, sector, and state.",
+    limit: "SOC 15 is broader than SWE and is not experience-specific; keep it separate from posting counts.",
+    url: "https://www.reveliolabs.com/public-labor-statistics",
+  },
+  {
+    source: "BLS CPS / OEWS",
+    role: "Slower structural employment and compensation confirmation",
+    availability: "Active public source — used on its release cadence",
+    confidence: "High within survey and sampling limits",
+    use: "CPS employment/unemployment context and OEWS occupation- and metro-level employment and wages.",
+    limit: "Background confirmation, not the biweekly headline and not a rapid AI-discontinuity detector.",
+    url: "https://www.bls.gov/cps/",
+  },
+  {
+    source: "SEC filings, earnings, and company disclosures",
+    role: "Experienced-SWE AI-substitution evidence gate",
+    availability: "Event-driven public review — no qualifying observation currently stored",
+    confidence: "High only when headcount, output, and AI attribution are explicit",
+    use: "Experienced backfills, engineering headcount, output per engineer, and direct AI attribution.",
+    limit: "A productivity quote or coding benchmark alone is not replacement evidence.",
+    url: "https://www.sec.gov/edgar/search/",
+  },
+  {
+    source: "New York WARN notices",
+    role: "NYC layoff-shock context",
+    availability: "Active public watch — no NYC SWE-specific observation currently stored",
+    confidence: "High for covered layoff events; low for occupation or AI specificity",
+    use: "Test whether a sharp NYC move is concentrated in a few large announced layoffs.",
+    limit: "WARN coverage is incomplete and does not establish SWE composition or AI causality.",
+    url: "https://dol.ny.gov/warn-dashboard",
+  },
+] as const;
+
+export const longitudinalMethod = [
+  "Append each dated observation; never overwrite earlier snapshots.",
+  "Show 2-week, 4-week, 12-week, and year-over-year movement only after enough observations exist.",
+  "Treat missing or inaccessible data as unavailable, never as zero or stable.",
+  "Keep NYC separate from national data and literal YOE separate from platform seniority labels.",
+  "Keep actual worker outcomes and company substitution evidence separate from AI capability benchmarks.",
+] as const;
