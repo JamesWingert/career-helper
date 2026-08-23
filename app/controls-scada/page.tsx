@@ -754,7 +754,7 @@ function LearningModule({ module, number, complete, onToggle }: { module: Module
     <summary>
       <span className={styles.moduleNumber}>{String(number).padStart(2, "0")}</span>
       <div><small>{module.months}</small><strong>{module.title}</strong><p>{module.outcome}</p></div>
-      <b>{complete ? "Complete" : `${module.resources.length} resources`}</b>
+      <b>{complete ? "Complete" : `${module.resources.length} ${module.resources.length === 1 ? "resource" : "resources"}`}</b>
     </summary>
     <div className={styles.moduleBody}>
       <section><h4>Learn</h4><ul>{module.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul></section>
