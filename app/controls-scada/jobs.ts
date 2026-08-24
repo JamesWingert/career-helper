@@ -12,7 +12,7 @@ export type LiveJob = {
   url: string;
 };
 
-export const JOBS_CHECKED_ON = "August 23, 2026";
+export const JOBS_CHECKED_ON = "August 24, 2026";
 
 export const liveJobs: LiveJob[] = [
   {
@@ -38,15 +38,15 @@ export const liveJobs: LiveJob[] = [
     url: "https://job-boards.greenhouse.io/onenergy/jobs/4357694009",
   },
   {
-    company: "Albireo Energy",
-    title: "Automation Engineer — Data Centers (SCADA)",
-    priority: "Priority",
-    location: "Gambrills, MD · Eastern or Central time",
-    pay: "Not listed",
-    experience: "1+ year controls, automation, or SCADA",
-    education: "EE, computer engineering, mechatronics, automation, or related field",
-    reason: "A direct data-center bridge using Ignition, Rockwell PLCs, EPMS, BACnet, Modbus, OPC UA, and commissioning.",
-    url: "https://www.linkedin.com/jobs/view/automation-engineer-development-at-albireo-energy-4405385984",
+    company: "Oklo",
+    title: "Controls Engineer — Fuel Fabrication",
+    priority: "Stretch",
+    location: "Idaho Falls, ID · remote",
+    pay: "$100k–$150k base + equity/bonus",
+    experience: "3+ years I&C including PLC, SCADA, SQL, and software V&V",
+    education: "Computer, electrical, mechatronics, industrial/systems, or related engineering bachelor’s",
+    reason: "A software-forward I&C role combining PLC/SCADA with SQL, Python, data systems, automated QA, and commissioning.",
+    url: "https://job-boards.greenhouse.io/oklo/jobs/6114732004",
   },
   {
     company: "CrossnoKaye",
