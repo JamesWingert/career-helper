@@ -1,5 +1,19 @@
-import { redirect } from "next/navigation";
+import { loadLatestSnapshot } from "../../../lib/market-turso";
+import { dashboardData } from "../data";
+import styles from "../page.module.css";
 
-export default function LegacyDashboardRoute() {
-  redirect("/ai-dashboard#ai-impact");
+export const dynamic = "force-dynamic";
+
+export default async function AiReplacementPage() {
+  const d = await loadLatestSnapshot(dashboardData);
+  const r = d.replacementEvidence;
+  return <main className={styles.page}>
+    <header className={styles.top}><div><span className={styles.topKicker}>AI replacement</span><h1 className={styles.title}>Evidence before benchmarks</h1><p className={styles.dek}>The question is not whether models can code. It is whether firms are measurably replacing experienced engineers while maintaining output and reliability.</p></div><dl className={styles.stamp}><div><dt>Signal</dt><dd>{r.signal}</dd></div><div><dt>Confidence</dt><dd>{r.confidence}</dd></div></dl></header>
+    <nav className={styles.sectionNav}><a href="/ai-dashboard">Overview</a><a href="/ai-dashboard/personal-risk">Personal risk</a><a href="/ai-dashboard/labor-market">Labor market</a><a href="/ai-dashboard/ai-replacement">AI replacement</a><a href="/ai-dashboard/career-response">Career response</a></nav>
+    <section className={styles.readout}><div><span>Current verdict</span><h2>{r.verdict}</h2><p>The signal strengthened this cycle because company-level attempts are now concrete enough to matter, but the evidence is still inconsistent with broad experienced-engineer replacement.</p></div></section>
+    <section className={styles.section}><header className={styles.sectionHead}><div><span>01</span><h2>Replacement evidence</h2></div><p>Green/yellow/red evidence; no fake composite score.</p></header><div className={styles.evidenceList}>{r.items.map(x=><article className={x.status === "Yellow" ? styles.warning : styles.up} key={x.company}><div><span>{x.company} · {x.confidence} confidence</span><strong>{x.status}</strong></div><p>{x.evidence}</p><a href={x.source} target="_blank" rel="noreferrer">source ↗</a></article>)}</div></section>
+    <section className={styles.section}><header className={styles.sectionHead}><div><span>02</span><h2>Labor outcome check</h2></div><p>Experienced-worker outcomes remain the higher-weight signal.</p></header><div className={styles.signalStrip}><article><span>Early-career canary</span><strong className={styles.negative}>-19%</strong><p>Stanford ages 22–25, highly exposed occupations</p></article><article><span>Experienced workers</span><strong className={styles.positive}>No comparable gap</strong><p>Stanford revised August analysis</p></article><article><span>Revelio job-content change</span><strong>{d.aiLaborTracker.withinJobActivityChangePct}%</strong><p>Measured activity change occurs within jobs</p></article></div></section>
+    <section className={styles.section}><header className={styles.sectionHead}><div><span>03</span><h2>Autonomy and reliability</h2></div><p>Capability evidence only; it does not automatically imply labor displacement.</p></header><div className={styles.metricGrid}><article className={styles.warning}><span>METR 50% horizon</span><strong>~12 h</strong><p>Public frontier; wide uncertainty and estimates above 16h are unreliable</p></article><article className={styles.neutral}><span>METR 80% horizon</span><strong>~1.5 h</strong><p>Better proxy for reliable completion than the 50% horizon</p></article><article className={styles.neutral}><span>DeepSWE leader</span><strong>{d.benchmarks[0].score}%</strong><p>{d.benchmarks[0].model}; unchanged this cycle</p></article></div></section>
+    <section className={styles.section}><header className={styles.sectionHead}><div><span>04</span><h2>Benchmark detail</h2></div><p>No frontier discontinuity in this refresh.</p></header><div className={styles.tableWrap}><table className={styles.dataTable}><thead><tr><th>Model</th><th>DeepSWE</th><th>Cost</th><th>Note</th></tr></thead><tbody>{d.benchmarks.map(x=><tr key={x.model}><td>{x.model}</td><td className={styles.value}>{x.score}%</td><td>{x.cost}</td><td>{x.note}</td></tr>)}</tbody></table></div></section>
+  </main>;
 }
