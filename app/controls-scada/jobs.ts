@@ -12,7 +12,7 @@ export type LiveJob = {
   url: string;
 };
 
-export const JOBS_CHECKED_ON = "August 24, 2026";
+export const JOBS_CHECKED_ON = "September 10, 2026";
 
 export const liveJobs: LiveJob[] = [
   {
@@ -30,7 +30,7 @@ export const liveJobs: LiveJob[] = [
     company: "ON.energy",
     title: "SCADA Engineer — Energy Management Systems",
     priority: "Priority",
-    location: "Houston, TX",
+    location: "Houston, TX · Miami, FL · Reston, VA",
     pay: "Not listed",
     experience: "2–5 years hands-on Ignition",
     education: "EE, controls, computer engineering, related field, or equivalent experience",
@@ -38,26 +38,26 @@ export const liveJobs: LiveJob[] = [
     url: "https://job-boards.greenhouse.io/onenergy/jobs/4357694009",
   },
   {
-    company: "Oklo",
-    title: "Controls Engineer — Fuel Fabrication",
+    company: "Anduril",
+    title: "Controls Engineer — Manufacturing Automation",
     priority: "Stretch",
-    location: "Idaho Falls, ID · remote",
-    pay: "$100k–$150k base + equity/bonus",
-    experience: "3+ years I&C including PLC, SCADA, SQL, and software V&V",
-    education: "Computer, electrical, mechatronics, industrial/systems, or related engineering bachelor’s",
-    reason: "A software-forward I&C role combining PLC/SCADA with SQL, Python, data systems, automated QA, and commissioning.",
-    url: "https://job-boards.greenhouse.io/oklo/jobs/6114732004",
+    location: "Costa Mesa, CA · on-site",
+    pay: "$129k–$171k base + equity",
+    experience: "2+ years controls and automation in production",
+    education: "Bachelor’s in CS, robotics, mechanical, or electrical engineering",
+    reason: "A high-tech manufacturing role that explicitly accepts CS and combines PLCs, factory software, commissioning, and Ignition.",
+    url: "https://job-boards.greenhouse.io/andurilindustries/jobs/5038031007",
   },
   {
-    company: "CrossnoKaye",
-    title: "Controls Engineer",
+    company: "Fluidstack",
+    title: "Controls Engineer, SCADA",
     priority: "Stretch",
-    location: "Remote US · up to 50% travel",
-    pay: "$155k–$175k estimated total cash + equity",
-    experience: "3 years industrial automation + deep PLC knowledge",
-    education: "Engineering or related bachelor’s",
-    reason: "Cloud-based controls, product-team QA, state machines, field deployment, and unusually strong controls compensation.",
-    url: "https://job-boards.greenhouse.io/crossnokaye/jobs/6099050004",
+    location: "Austin · Los Angeles · New York · San Francisco · Seattle · on-site",
+    pay: "$164k–$206k base + equity",
+    experience: "SCADA design and commissioning in critical or industrial infrastructure",
+    education: "No degree requirement listed",
+    reason: "A high-paying data-center SCADA destination spanning architecture, field protocols, HMIs, alarms, and point validation.",
+    url: "https://jobs.ashbyhq.com/fluidstack/807d7ee9-d5cf-4cbe-94ed-de0d842226a9",
   },
   {
     company: "AWS",
