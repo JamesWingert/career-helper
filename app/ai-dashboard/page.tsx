@@ -20,10 +20,10 @@ export default async function AiDashboardPage() {
 
   const scoreboard = [
     { label: "~5 YOE risk", value: o.personalRisk, note: `${o.personalRiskTrend} · ${o.personalRiskConfidence} confidence`, tone: "neutral" },
-    { label: "SWE hiring", value: o.hiring, note: `Trend: ${o.hiringTrend}`, tone: "down" },
+    { label: "SWE hiring", value: o.hiring, note: `Trend: ${o.hiringTrend}`, tone: "warning" },
     { label: "Experienced AI replacement", value: o.aiReplacement, note: o.aiReplacementTrend, tone: "warning" },
-    { label: "Mid-level demand", value: o.midLevel, note: "Latest comparable seniority baseline", tone: "down" },
-    { label: "Senior demand", value: o.senior, note: "Senior-heavy recovery remains visible", tone: "up" },
+    { label: "Mid-level demand", value: o.midLevel, note: "Specialization pressure is rising", tone: "warning" },
+    { label: "Senior demand", value: o.senior, note: "AI-adopter headcount data remain senior-favorable", tone: "up" },
     { label: "NYC SWE demand", value: d.linkedin.countLabel, note: o.nycDemand, tone: "neutral" },
   ];
 
@@ -74,9 +74,9 @@ export default async function AiDashboardPage() {
     <section className={styles.section}>
       <header className={styles.sectionHead}><div><span>03</span><h2>Current directional read</h2></div><p>Weak level is not the same as worsening direction.</p></header>
       <div className={styles.signalStrip}>
-        <article><span>Indeed SWE · 2 weeks</span><strong className={styles.positive}>+{d.trends.swe.twoWeekPct}%</strong><p>Small improvement from a weak base</p></article>
-        <article><span>Indeed SWE · 4 weeks</span><strong className={styles.negative}>{d.trends.swe.fourWeekPct}%</strong><p>Essentially flat/noisy</p></article>
-        <article><span>SWE gap vs overall</span><strong className={styles.negative}>{d.trends.relativeGapPoints.toFixed(2)} pts</strong><p>Structural weakness remains</p></article>
+        <article><span>Indeed SWE · 2 weeks</span><strong className={styles.positive}>+{d.trends.swe.twoWeekPct}%</strong><p>Improving from a weak base</p></article>
+        <article><span>Indeed SWE · 4 weeks</span><strong className={styles.positive}>+{d.trends.swe.fourWeekPct}%</strong><p>Positive, not yet a structural break</p></article>
+        <article><span>SWE gap vs overall</span><strong className={styles.negative}>{d.trends.relativeGapPoints.toFixed(2)} pts</strong><p>Narrower, but structural weakness remains</p></article>
       </div>
     </section>
   </main>;
