@@ -12,7 +12,7 @@ export type LiveJob = {
   url: string;
 };
 
-export const JOBS_CHECKED_ON = "September 10, 2026";
+export const JOBS_CHECKED_ON = "September 14, 2026";
 
 export const liveJobs: LiveJob[] = [
   {
@@ -38,15 +38,15 @@ export const liveJobs: LiveJob[] = [
     url: "https://job-boards.greenhouse.io/onenergy/jobs/4357694009",
   },
   {
-    company: "Anduril",
-    title: "Controls Engineer — Manufacturing Automation",
+    company: "SpaceXAI",
+    title: "Controls Engineer — Supercomputer Infrastructure",
     priority: "Stretch",
-    location: "Costa Mesa, CA · on-site",
-    pay: "$129k–$171k base + equity",
-    experience: "2+ years controls and automation in production",
-    education: "Bachelor’s in CS, robotics, mechanical, or electrical engineering",
-    reason: "A high-tech manufacturing role that explicitly accepts CS and combines PLCs, factory software, commissioning, and Ignition.",
-    url: "https://job-boards.greenhouse.io/andurilindustries/jobs/5038031007",
+    location: "Memphis, TN · Southaven, MS · on-site",
+    pay: "Not listed",
+    experience: "1+ year industrial automation design and commissioning",
+    education: "Bachelor’s in an engineering discipline",
+    reason: "AI-campus controls across BMS, EPMS, SCADA, PLCs, cooling, and power, with useful C#, .NET, Python, and SQL overlap.",
+    url: "https://job-boards.greenhouse.io/xai/jobs/5229550007",
   },
   {
     company: "Fluidstack",
@@ -96,7 +96,7 @@ export const liveJobs: LiveJob[] = [
     company: "E Tech Group",
     title: "Automation Engineer",
     priority: "Bridge",
-    location: "Location not listed",
+    location: "Longview, TX",
     pay: "Not listed",
     experience: "2+ years or equivalent education/experience",
     education: "Engineering or related engineering bachelor’s",
