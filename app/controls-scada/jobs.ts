@@ -12,7 +12,7 @@ export type LiveJob = {
   url: string;
 };
 
-export const JOBS_CHECKED_ON = "September 14, 2026";
+export const JOBS_CHECKED_ON = "September 21, 2026";
 
 export const liveJobs: LiveJob[] = [
   {
