@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-25",
+  "nextRefresh": "2026-10-09",
+  "currentRead": "SWE hiring remains structurally weak but continues to improve from its depressed base. Stanford now reports muted AI-exposure-related weakness through age 34, the most relevant new warning for a roughly 5 YOE engineer. A separate 41-country Stanford study finds AI adopters primarily shift workforce composition toward senior employment through senior growth, with suggestive modest overall employment growth. Risk remains Low-Moderate; no pivot signal.",
+  "overview": {
+    "personalRiskTrend": "Stable / watch 26-34",
+    "hiring": "Weak, continuing to improve",
+    "hiringTrend": "Rising; latest 2-week gain slowed",
+    "midLevel": "Weak / watch 26-34 canary",
+    "nycDemand": "No verified break; exact longitudinal LinkedIn count still not reproducibly exposed",
+    "changed": [
+      "Indeed/FRED software-development postings rose from 76.12 to 77.32 over the latest comparable two-week interval (+1.6%). The 12-week gain is about +6.6%.",
+      "Stanford's September 23 update says the strongest AI-exposure divergence remains early-career, but muted evidence now extends through age 34.",
+      "Stanford's new 41-country study finds the junior-share decline at AI adopters comes mainly from senior employment growth, with suggestive modest overall employment growth.",
+      "Revelio still finds AI-adopting firms expanding headcount relative to non-adopters while broad active postings fell 3% in August.",
+      "METR has no newer time-horizon update since May 8; reliable low-intervention multi-day production ownership remains unproven."
+    ]
+  },
+  "trends": {
+    "swe": {
+      "current": 77.32,
+      "asOf": "2026-09-18",
+      "twoWeekPct": 1.58,
+      "fourWeekPct": 3.69,
+      "twelveWeekPct": 6.63
+    },
+    "overall": {
+      "current": 103.45,
+      "asOf": "2026-09-18",
+      "twoWeekPct": 1.02,
+      "fourWeekPct": 1.51
+    },
+    "relativeGapPoints": -26.13,
+    "relativeGapPct": -25.26
+  },
+  "personalRisk": {
+    "trend": "Stable / watch 26-34"
+  },
+  "replacementEvidence": {
+    "signal": "Yellow",
+    "trend": "Stable yellow; labor canary broadened slightly",
+    "verdict": "AI is materially changing engineering productivity and workforce composition. Stanford now sees muted exposure-related weakness through age 34, but its new international evidence says the main adopter effect is stronger senior growth rather than broad job destruction. Experienced-SWE replacement is still not established."
+  }
+}
