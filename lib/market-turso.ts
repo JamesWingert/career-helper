@@ -1,3 +1,4 @@
+import latestMarketPatch from "../data/market-snapshots/2026-09-25-dashboard.json";
 import { createClient } from "@libsql/client";
 
 function env(...keys: string[]) {
@@ -43,7 +44,7 @@ export async function ensureMarketSchema() {
   return client;
 }
 
-type DatedSnapshot = { updatedAt?: string };
+type DatedSnapshot = { updatedAt?: string; [key: string]: any };\n\nfunction applyLatestRepoPatch<T>(fallback: T): T {\n  const base = fallback as DatedSnapshot;\n  if (!base || typeof base !== "object" || !base.updatedAt || base.updatedAt >= latestMarketPatch.date) return fallback;\n  const p: any = latestMarketPatch;\n  return { ...base, updatedAt: p.date, nextRefresh: p.nextRefresh, currentRead: p.currentRead, overview: { ...base.overview, ...p.overview }, trends: { ...base.trends, ...p.trends, swe: { ...base.trends?.swe, ...p.trends?.swe }, overall: { ...base.trends?.overall, ...p.trends?.overall } }, personalRisk: { ...base.personalRisk, ...p.personalRisk }, replacementEvidence: { ...base.replacementEvidence, ...p.replacementEvidence } } as T;\n}
 
 export async function loadLatestSnapshot<T>(fallback: T): Promise<T> {
   try {
