@@ -54,32 +54,34 @@ function applyLatestRepoPatch<T>(fallback: T): T {
 }
 
 export async function loadLatestSnapshot<T>(fallback: T): Promise<T> {
+  const repoSnapshot = applyLatestRepoPatch(fallback);
+
   try {
     const client = await ensureMarketSchema();
-    if (!client) return fallback;
+    if (!client) return repoSnapshot;
 
     const result = await client.execute(
       "SELECT captured_at, payload FROM swe_ai_snapshots ORDER BY captured_at DESC LIMIT 1",
     );
     const payload = result.rows[0]?.payload;
     const storedDate = result.rows[0]?.captured_at;
-    const fallbackDate = (fallback as DatedSnapshot)?.updatedAt;
+    const fallbackDate = (repoSnapshot as DatedSnapshot)?.updatedAt;
 
     // Repo data is the durable fallback. If a scheduled refresh committed a newer
     // snapshot than Turso contains, seed that snapshot automatically on the first
     // production request instead of allowing an older DB row to mask the update.
     if (fallbackDate && (typeof storedDate !== "string" || fallbackDate > storedDate)) {
-      await saveMarketSnapshot(fallbackDate, fallback);
-      return fallback;
+      await saveMarketSnapshot(fallbackDate, repoSnapshot);
+      return repoSnapshot;
     }
 
     if (typeof payload !== "string") {
-      if (fallbackDate) await saveMarketSnapshot(fallbackDate, fallback);
-      return fallback;
+      if (fallbackDate) await saveMarketSnapshot(fallbackDate, repoSnapshot);
+      return repoSnapshot;
     }
     return JSON.parse(payload) as T;
   } catch {
-    return fallback;
+    return repoSnapshot;
   }
 }
 
