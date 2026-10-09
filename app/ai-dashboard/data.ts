@@ -1,6 +1,6 @@
 export const dashboardData = {
-  updatedAt: "2026-09-11",
-  nextRefresh: "2026-09-25",
+  updatedAt: "2026-10-09",
+  nextRefresh: "2026-10-23",
   cadence: "Every 2 weeks",
   currentRead: "SWE hiring is still structurally weak, but the latest repeatable series improved modestly rather than deteriorating. The best current labor evidence still points to AI changing job content and raising productivity more than broadly replacing experienced engineers. For a competent engineer around 5 YOE, risk remains Low–Moderate: specialization and experience-depth requirements are rising, but there is still no evidence of a new mid-career employment cliff.",
   overview: {
@@ -25,7 +25,7 @@ export const dashboardData = {
     ],
   },
   metrics: [
-    { label: "Indeed/FRED SWE hiring", value: "76.12", note: "Sep 4, 2026 · Feb 2020 = 100", tone: "negative" },
+    { label: "Indeed/FRED SWE hiring", value: "78.33", note: "Oct 2, 2026 · Feb 2020 = 100", tone: "negative" },
     { label: "TrueUp software jobs", value: "54,747", note: "Aug 31, 2026 · +34.1% on TrueUp trend measure", tone: "positive" },
     { label: "LinkedIn NY SWE", value: "4,000+ last verified", note: "Exact stable query last reproducibly observed Aug 28", tone: "neutral" },
     { label: "Early-career AI gap", value: "-19%", note: "Ages 22–25 in highly AI-exposed occupations · Stanford revised analysis", tone: "negative" },
