@@ -12,30 +12,30 @@ export type LiveJob = {
   url: string;
 };
 
-export const JOBS_CHECKED_ON = "September 28, 2026";
+export const JOBS_CHECKED_ON = "October 19, 2026";
 
 export const liveJobs: LiveJob[] = [
   {
     company: "Fluidstack",
-    title: "Software Engineer, SCADA",
+    title: "Software Engineer, Facilities",
     priority: "Priority",
-    location: "Austin · New York · San Francisco · Seattle · on-site",
+    location: "Austin · San Francisco · Seattle · on-site",
     pay: "$224k–$264k base + equity",
-    experience: "Direct SCADA or industrial-controls experience",
+    experience: "Large-scale production software; controls or data-center experience is a bonus",
     education: "No degree requirement listed",
-    reason: "The closest match to tech compensation and SWE work: SCADA/EPMS software, OPC UA, historians, and alarms.",
-    url: "https://jobs.ashbyhq.com/fluidstack/7528afd0-2aae-4cab-8d47-9c3e5d004813",
+    reason: "The cleanest SWE transfer: production services for facility telemetry, equipment models, control APIs, and commissioning tests.",
+    url: "https://jobs.ashbyhq.com/fluidstack/f5444f2e-60a0-48ed-a38b-6c500743a6ff",
   },
   {
     company: "ON.energy",
-    title: "SCADA Engineer — Energy Management Systems",
+    title: "Deployment Engineer-Energy Management System",
     priority: "Priority",
-    location: "Houston, TX · Miami, FL · Reston, VA",
+    location: "Atlanta · remote, or Houston · hybrid · 30–40% travel",
     pay: "Not listed",
-    experience: "2–5 years hands-on Ignition",
-    education: "EE, controls, computer engineering, related field, or equivalent experience",
-    reason: "Software-heavy Ignition work: MQTT, deployment tools, distributed SCADA, historian performance, and commissioning.",
-    url: "https://job-boards.greenhouse.io/onenergy/jobs/4357694009",
+    experience: "Direct hands-on Ignition deployment in OT or industrial environments",
+    education: "No degree requirement listed",
+    reason: "A software-heavy Ignition role covering tags, UDTs, alarms, historians, PLC integration, and commissioning.",
+    url: "https://job-boards.greenhouse.io/onenergy/jobs/4162894009",
   },
   {
     company: "SpaceXAI",
@@ -50,14 +50,14 @@ export const liveJobs: LiveJob[] = [
   },
   {
     company: "Fluidstack",
-    title: "Controls Engineer, SCADA",
+    title: "Controls Engineer, Commissioning Automation",
     priority: "Stretch",
-    location: "Austin, TX · on-site",
+    location: "Austin · San Francisco · Seattle · on-site",
     pay: "$164k–$206k base + equity",
-    experience: "SCADA design and commissioning in critical or industrial infrastructure",
+    experience: "Hands-on building or data-center controls commissioning + BMS/PLC programming",
     education: "No degree requirement listed",
-    reason: "A high-paying data-center SCADA destination spanning architecture, field protocols, HMIs, alarms, and point validation.",
-    url: "https://jobs.ashbyhq.com/fluidstack/807d7ee9-d5cf-4cbe-94ed-de0d842226a9",
+    reason: "A high-paying field-controls role that builds automated functional tests and analyzes failures on live data-center sites.",
+    url: "https://jobs.ashbyhq.com/fluidstack/2c578d0c-a41b-4877-9f42-066db15c1049",
   },
   {
     company: "OpenAI",
