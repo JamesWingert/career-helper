@@ -1,0 +1,24 @@
+name: SWE AI dashboard source audit
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 13 6,20 * *'
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect and validate sources
+        run: python scripts/market_refresh.py
+      - name: Preserve audit artifact even on incomplete refresh
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-source-audit
+          path: data/market-snapshots/automated/*.json
+          if-no-files-found: warn
