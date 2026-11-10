@@ -12,7 +12,7 @@ export type LiveJob = {
   url: string;
 };
 
-export const JOBS_CHECKED_ON = "October 19, 2026";
+export const JOBS_CHECKED_ON = "November 10, 2026";
 
 export const liveJobs: LiveJob[] = [
   {
@@ -28,14 +28,25 @@ export const liveJobs: LiveJob[] = [
   },
   {
     company: "ON.energy",
-    title: "Deployment Engineer-Energy Management System",
+    title: "SCADA Engineer — EMS",
     priority: "Priority",
-    location: "Atlanta · remote, or Houston · hybrid · 30–40% travel",
+    location: "Houston · Miami · Reston",
     pay: "Not listed",
-    experience: "Direct hands-on Ignition deployment in OT or industrial environments",
-    education: "No degree requirement listed",
-    reason: "A software-heavy Ignition role covering tags, UDTs, alarms, historians, PLC integration, and commissioning.",
-    url: "https://job-boards.greenhouse.io/onenergy/jobs/4162894009",
+    experience: "3+ years hands-on Ignition configuration and scripting",
+    education: "EE, controls, computer engineering, related field, or equivalent experience",
+    reason: "Software-forward Ignition work spanning tags, UDTs, MQTT, deployment tools, historians, redundancy, and commissioning.",
+    url: "https://job-boards.greenhouse.io/onenergy/jobs/4462644009",
+  },
+  {
+    company: "OpenAI",
+    title: "Controls Engineer, BMS & EPMS",
+    priority: "Stretch",
+    location: "San Francisco · 50% travel",
+    pay: "$177k–$285k base + equity",
+    experience: "Hands-on BMS or EPMS programming, integration, and commissioning",
+    education: "ME, EE, controls, automation, related field, or equivalent experience",
+    reason: "A top-pay data-center destination that welcomes early-career engineers with practical depth in either BMS or EPMS.",
+    url: "https://jobs.ashbyhq.com/openai/a46ffc60-39c6-4b1e-bd0f-9c33a8b06703",
   },
   {
     company: "SpaceXAI",
@@ -60,17 +71,6 @@ export const liveJobs: LiveJob[] = [
     url: "https://jobs.ashbyhq.com/fluidstack/2c578d0c-a41b-4877-9f42-066db15c1049",
   },
   {
-    company: "OpenAI",
-    title: "Data Center Controls Network Engineer",
-    priority: "Stretch",
-    location: "San Francisco · hybrid",
-    pay: "$257k–$327k base + equity",
-    experience: "8+ years controls, automation, OT networking, or critical infrastructure",
-    education: "Bachelor’s in electrical, computer, network, systems engineering, or related field",
-    reason: "The highest listed pay and strong SWE overlap in Python, IaC, APIs, Git-based configuration, and OT networking, but highly experience-gated.",
-    url: "https://jobs.ashbyhq.com/openai/68f7ef0f-97a4-47ce-ac0a-a442572ab7a7",
-  },
-  {
     company: "AWS",
     title: "Data Center Controls Engineer",
     priority: "Stretch",
@@ -83,14 +83,14 @@ export const liveJobs: LiveJob[] = [
   },
   {
     company: "SpaceX",
-    title: "Automation & Controls Engineer — Facilities",
+    title: "Automation & Controls Engineer (Facilities)",
     priority: "Stretch",
     location: "Hawthorne, CA",
-    pay: "$100k–$135k base + incentives",
+    pay: "$100k–$160k base by level + incentives",
     experience: "1+ year controls design and commissioning",
     education: "Bachelor’s in an engineering discipline",
     reason: "Critical-infrastructure controls with PLC, SCADA, BAS/HVAC, and useful overlap in C#/.NET, Python, and SQL.",
-    url: "https://job-boards.greenhouse.io/spacex/jobs/8546353002",
+    url: "https://job-boards.greenhouse.io/spacex/jobs/8911675002",
   },
   {
     company: "E Tech Group",
