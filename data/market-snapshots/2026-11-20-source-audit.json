@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-20",
+  "type": "partial-source-audit",
+  "complete": false,
+  "published_to_dashboard": false,
+  "source_coverage": {
+    "indeed_fred": "not refreshed",
+    "linkedin_nyc": "not refreshed",
+    "nyc_explicit_yoe": "not refreshed",
+    "trueup": "not refreshed",
+    "lightcast_public": "not refreshed",
+    "revelio": "not refreshed",
+    "stanford": "not refreshed",
+    "bls": "not refreshed",
+    "ny_warn": "not refreshed",
+    "sec_company": "not refreshed",
+    "metr": "verified November 5 report; no new November 20 task horizon verified",
+    "coding_evaluations": "not refreshed"
+  },
+  "metr": {
+    "report_date": "2026-11-05",
+    "title": "Independent Assessment of AI R&D Acceleration at Anthropic in October 2026",
+    "capability_growth_rate_multiplier": 1.9,
+    "confidence_interval_95": [
+      1.5,
+      2.8
+    ],
+    "interpretation": "Anthropic's progress on well-specified tasks accelerated; not evidence of autonomous multi-day production ownership or experienced SWE headcount displacement",
+    "limitations": "Major underlying evidence redacted; internal research setting",
+    "source": "https://www.alignmentforum.org/posts/N5AmYkRks5CqAxvBg/metr-independent-assessment-of-ai-r-and-d-acceleration-at"
+  },
+  "assessment": {
+    "hiring": "unverified current direction",
+    "experienced_displacement": "insufficient direct causal evidence",
+    "five_yoe_employability": "unverified current NYC sample",
+    "pivot": "no new corroborated pivot evidence; prior recommendation unchanged provisionally"
+  },
+  "notes": "No production update should be claimed from this partial audit. Existing scheduled collector explicitly fails until mandatory source coverage is implemented."
+}
