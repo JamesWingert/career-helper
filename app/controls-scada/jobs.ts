@@ -12,7 +12,7 @@ export type LiveJob = {
   url: string;
 };
 
-export const JOBS_CHECKED_ON = "November 16, 2026";
+export const JOBS_CHECKED_ON = "November 23, 2026";
 
 export const liveJobs: LiveJob[] = [
   {
@@ -118,11 +118,11 @@ export const liveJobs: LiveJob[] = [
     company: "Johnson Controls",
     title: "Controls Systems Technician",
     priority: "Fallback",
-    location: "West Valley City, UT",
-    pay: "$25–$34.50/hour",
-    experience: "1–2 years HVAC, electronic, or mechanical systems",
+    location: "South Bend, IN",
+    pay: "$23–$33/hour",
+    experience: "Technical aptitude required; 2 years electronic or mechanical systems preferred",
     education: "No degree requirement listed",
     reason: "A BAS commissioning route into BMS experience, but it is more field-heavy and likely a large pay cut from SWE.",
-    url: "https://jobs.johnsoncontrols.com/job/WD30277108",
+    url: "https://jobs.johnsoncontrols.com/job/WD30282182",
   },
 ];
